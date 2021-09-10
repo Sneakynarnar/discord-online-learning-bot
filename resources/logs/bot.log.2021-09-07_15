@@ -1,0 +1,76 @@
+2021-09-07 14:25:32,705:DEBUG:bot: ========================RESTART===========================
+2021-09-07 14:25:32,894:DEBUG:bot: Cogs Loaded
+2021-09-07 14:25:35,577:DEBUG:bot: Help cog is ready!
+2021-09-07 14:25:35,577:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:25:35,578:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:25:35,578:DEBUG:bot: Commands cog is ready!
+2021-09-07 14:25:35,578:DEBUG:bot: Setup cog is ready!
+2021-09-07 14:25:35,578:DEBUG:bot: Dev cog is ready!
+2021-09-07 14:28:22,261:DEBUG:bot: Recognised avaliable channel
+2021-09-07 14:28:22,483:DEBUG:bot: Recognised avaliable channel
+2021-09-07 14:28:23,833:DEBUG:bot: Recognised avaliable channel
+2021-09-07 14:34:10,709:DEBUG:bot: Recognised avaliable channel
+2021-09-07 14:34:10,890:DEBUG:bot: Recognised avaliable channel
+2021-09-07 14:34:11,996:DEBUG:bot: Recognised avaliable channel
+2021-09-07 14:48:46,020:DEBUG:bot: ========================RESTART===========================
+2021-09-07 14:48:46,060:DEBUG:bot: Cogs Loaded
+2021-09-07 14:48:48,726:DEBUG:bot: Help cog is ready!
+2021-09-07 14:48:48,727:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:48:48,727:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:48:48,727:DEBUG:bot: Commands cog is ready!
+2021-09-07 14:48:48,727:DEBUG:bot: Setup cog is ready!
+2021-09-07 14:48:48,727:DEBUG:bot: Dev cog is ready!
+2021-09-07 14:50:31,611:DEBUG:bot: ========================RESTART===========================
+2021-09-07 14:50:31,637:DEBUG:bot: Cogs Loaded
+2021-09-07 14:50:34,234:DEBUG:bot: Help cog is ready!
+2021-09-07 14:50:34,234:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:50:34,234:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:50:34,234:DEBUG:bot: Commands cog is ready!
+2021-09-07 14:50:34,234:DEBUG:bot: Setup cog is ready!
+2021-09-07 14:50:34,234:DEBUG:bot: Dev cog is ready!
+2021-09-07 14:51:17,687:DEBUG:bot: ========================RESTART===========================
+2021-09-07 14:51:17,723:DEBUG:bot: Cogs Loaded
+2021-09-07 14:51:20,358:DEBUG:bot: Help cog is ready!
+2021-09-07 14:51:20,358:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:51:20,358:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:51:20,358:DEBUG:bot: Commands cog is ready!
+2021-09-07 14:51:20,358:DEBUG:bot: Setup cog is ready!
+2021-09-07 14:51:20,358:DEBUG:bot: Dev cog is ready!
+2021-09-07 14:56:01,315:DEBUG:bot: ========================RESTART===========================
+2021-09-07 14:56:01,346:DEBUG:bot: Error loading dev Exception: Extension 'cogs.dev' raised an error: SyntaxError: invalid syntax (dev.py, line 13)
+2021-09-07 14:56:01,347:DEBUG:bot: Cogs Loaded
+2021-09-07 14:56:03,941:DEBUG:bot: Help cog is ready!
+2021-09-07 14:56:03,941:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:56:03,941:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:56:03,941:DEBUG:bot: Commands cog is ready!
+2021-09-07 14:56:03,941:DEBUG:bot: Setup cog is ready!
+2021-09-07 14:56:07,925:DEBUG:bot: ========================RESTART===========================
+2021-09-07 14:56:07,958:DEBUG:bot: Cogs Loaded
+2021-09-07 14:56:10,599:DEBUG:bot: Help cog is ready!
+2021-09-07 14:56:10,599:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:56:10,599:DEBUG:bot: Homework cog is ready!
+2021-09-07 14:56:10,599:DEBUG:bot: Commands cog is ready!
+2021-09-07 14:56:10,599:DEBUG:bot: Setup cog is ready!
+2021-09-07 14:56:10,600:DEBUG:bot: Dev cog is ready!
+2021-09-07 15:04:27,938:DEBUG:bot: ========================RESTART===========================
+2021-09-07 15:04:27,981:DEBUG:bot: Cogs Loaded
+2021-09-07 15:04:30,547:DEBUG:bot: Help cog is ready!
+2021-09-07 15:04:30,547:DEBUG:bot: Homework cog is ready!
+2021-09-07 15:04:30,547:DEBUG:bot: Homework cog is ready!
+2021-09-07 15:04:30,547:DEBUG:bot: Commands cog is ready!
+2021-09-07 15:04:30,547:DEBUG:bot: Setup cog is ready!
+2021-09-07 15:04:30,548:DEBUG:bot: Dev cog is ready!
+2021-09-07 15:05:22,900:DEBUG:bot: ========================RESTART===========================
+2021-09-07 15:05:22,936:DEBUG:bot: Cogs Loaded
+2021-09-07 15:05:25,501:DEBUG:bot: Help cog is ready!
+2021-09-07 15:05:25,501:DEBUG:bot: Homework cog is ready!
+2021-09-07 15:05:25,501:DEBUG:bot: Homework cog is ready!
+2021-09-07 15:05:25,501:DEBUG:bot: Commands cog is ready!
+2021-09-07 15:05:25,502:DEBUG:bot: Setup cog is ready!
+2021-09-07 15:05:25,502:DEBUG:bot: Dev cog is ready!
+2021-09-07 15:07:59,159:DEBUG:bot: Recognised avaliable channel
+2021-09-07 15:07:59,760:DEBUG:bot: Recognised avaliable channel
+2021-09-07 15:08:00,347:DEBUG:bot: Recognised avaliable channel
+2021-09-07 15:09:22,400:DEBUG:bot: Recognised avaliable channel
+2021-09-07 15:09:22,623:DEBUG:bot: Recognised avaliable channel
+2021-09-07 15:09:23,683:DEBUG:bot: Recognised avaliable channel

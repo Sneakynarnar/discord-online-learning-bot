@@ -1,0 +1,15 @@
+import sqlite3
+
+con = sqlite3.connect("resources/databases/schooldata.db")
+cur = con.cursor()
+#cur.execute("DELETE FROM help_channels")
+#cur.execute("DELETE FROM subjects")
+#cur.execute("DROP TABLE helpLevels")
+cur.execute("DELETE FROM helpRoles")
+cur.execute("DELETE FROM helpLevels")
+#cur.execute("CREATE TABLE helpLevels (memberId integer, guildId integer, XP integer, peopleHelped integer, level integer)")
+#cur.execute("CREATE TABLE helpRoles (roleId integer PRIMARY_KEY, guildId integer,level integer ) ")
+#cur.execute("DROP TABLE scoolGuilds;")
+##cur.execute("CREATE TABLE schoolGuilds (guildID integer PRIMARY_KEY, schoolName text, schoolAbreviation text, studentRoleId integer, teacherRoleId integer, managerRoleId integer, avaliableCategoryId integer, dormantCategoryId integer)")
+con.commit()
+cur.close()
