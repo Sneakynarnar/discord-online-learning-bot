@@ -1,18 +1,32 @@
-from PIL import Image, ImageDraw
+names = ["Ash", "Birch", "Cedar", "Dragon", "Elm", "Fir","Garjan", "Hazel", "Ivorypalm", "Juniper", "Kapok", "Locust", "Mombin","Nutmeg", "Oak", "Palm","Sapel", \
+    "Teak", "Upas", "Wingnut", "Yew", "Zelkova"]
+ROWS = 3
+rem = len(names) %ROWS
+if rem == 0:
+  columns = (len(names) /ROWS)  
+else:
+  columns = (len(names)//ROWS) + 1
+  students = ""
+  names.sort()
+  total = 0
+  for name in names:
+    maxLength = len(name) #getting the longest name
+    total+= len(name)
 
-# Open template and get drawing context
-im = Image.open('resources/images/xpbar.png').convert('RGB')
-draw = ImageDraw.Draw(im)
+averageLength= total/ len(names)
+upperQuartile = (maxLength + averageLength) / 2 # Finding the upper quartile which will be a reasonable amount of space between each columm
+totalCharacters = upperQuartile + 4 
 
-# Cyan-ish fill colour
-color=(98,211,245)
+for x in range(columns):
+  studentrow = ""
+  for y in range(ROWS):
+      print(y)
+      index = x+(ROWS*(y))
+      member = names[index]
+      spaces = int(totalCharacters - len(member)) # This will make sure that the correct amount of spaces will be added to make the columns inline
+      whitespace = ""
+      whitespace += " "*spaces
 
-# Draw circle at right end of progress bar
-x, y, diam =  592, 8, 34 ## 592
-draw.ellipse([x,y,x+diam,y+diam], fill=color)
-
-# Flood-fill from extreme left of progress bar area to behind circle
-ImageDraw.floodfill(im, xy=(14,24), value=color, thresh=40)
-
-# Save result
-im.show()
+      studentrow+= name+whitespace
+  students += studentrow + "\n"
+print(students)

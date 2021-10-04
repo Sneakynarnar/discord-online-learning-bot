@@ -1,0 +1,408 @@
+2021-09-29 15:01:49,918:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:01:50,079:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 79)
+2021-09-29 15:01:50,084:DEBUG:bot: Cogs Loaded
+2021-09-29 15:01:52,813:DEBUG:bot: Help cog is ready!
+2021-09-29 15:01:52,813:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:01:52,813:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:01:52,813:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:01:52,813:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:02:06,278:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:02:06,310:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 82)
+2021-09-29 15:02:06,313:DEBUG:bot: Cogs Loaded
+2021-09-29 15:02:08,944:DEBUG:bot: Help cog is ready!
+2021-09-29 15:02:08,944:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:02:08,944:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:02:08,944:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:02:08,944:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:02:37,473:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:02:37,503:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 86)
+2021-09-29 15:02:37,506:DEBUG:bot: Cogs Loaded
+2021-09-29 15:02:40,218:DEBUG:bot: Help cog is ready!
+2021-09-29 15:02:40,218:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:02:40,218:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:02:40,218:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:02:40,219:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:03:07,802:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:03:07,835:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 172)
+2021-09-29 15:03:07,838:DEBUG:bot: Cogs Loaded
+2021-09-29 15:03:10,415:DEBUG:bot: Help cog is ready!
+2021-09-29 15:03:10,415:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:03:10,415:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:03:10,415:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:03:10,415:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:24:04,331:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:24:04,383:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: TypeError: cog_slash() got an unexpected keyword argument 'option'
+2021-09-29 15:24:04,391:DEBUG:bot: Cogs Loaded
+2021-09-29 15:24:07,035:DEBUG:bot: Help cog is ready!
+2021-09-29 15:24:07,035:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:24:07,035:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:24:07,035:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:24:07,035:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:26:11,194:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:26:11,246:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: TypeError: create_option() got an unexpected keyword argument 'option'
+2021-09-29 15:26:11,253:DEBUG:bot: Cogs Loaded
+2021-09-29 15:26:13,845:DEBUG:bot: Help cog is ready!
+2021-09-29 15:26:13,846:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:26:13,846:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:26:13,846:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:26:13,846:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:26:57,272:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:26:57,317:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: TypeError: create_option() got an unexpected keyword argument 'option'
+2021-09-29 15:26:57,322:DEBUG:bot: Cogs Loaded
+2021-09-29 15:26:59,949:DEBUG:bot: Help cog is ready!
+2021-09-29 15:26:59,949:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:26:59,949:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:26:59,949:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:26:59,949:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:27:23,160:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:27:23,203:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: TypeError: create_option() got an unexpected keyword argument 'option'
+2021-09-29 15:27:23,208:DEBUG:bot: Cogs Loaded
+2021-09-29 15:27:25,780:DEBUG:bot: Help cog is ready!
+2021-09-29 15:27:25,780:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:27:25,780:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:27:25,780:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:27:25,781:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:33:13,760:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:33:13,810:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: TypeError: create_option() got an unexpected keyword argument 'option'
+2021-09-29 15:33:13,815:DEBUG:bot: Cogs Loaded
+2021-09-29 15:33:16,370:DEBUG:bot: Help cog is ready!
+2021-09-29 15:33:16,370:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:33:16,370:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:33:16,370:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:33:16,370:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:34:40,912:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:34:40,970:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: TypeError: create_option() got an unexpected keyword argument 'option'
+2021-09-29 15:34:40,976:DEBUG:bot: Cogs Loaded
+2021-09-29 15:34:43,597:DEBUG:bot: Help cog is ready!
+2021-09-29 15:34:43,597:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:34:43,597:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:34:43,597:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:34:43,597:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:35:42,682:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:35:42,741:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: TypeError: create_option() got an unexpected keyword argument 'option'
+2021-09-29 15:35:42,748:DEBUG:bot: Cogs Loaded
+2021-09-29 15:35:45,320:DEBUG:bot: Help cog is ready!
+2021-09-29 15:35:45,320:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:35:45,320:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:35:45,320:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:35:45,320:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:37:20,635:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:37:20,695:DEBUG:bot: Cogs Loaded
+2021-09-29 15:37:23,424:DEBUG:bot: Help cog is ready!
+2021-09-29 15:37:23,424:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:37:23,424:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:37:23,424:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:37:23,424:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:37:23,424:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:40:17,709:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:40:17,769:DEBUG:bot: Cogs Loaded
+2021-09-29 15:40:20,406:DEBUG:bot: Help cog is ready!
+2021-09-29 15:40:20,406:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:40:20,406:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:40:20,406:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:40:20,406:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:40:20,406:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:42:43,411:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:42:43,470:DEBUG:bot: Cogs Loaded
+2021-09-29 15:42:46,064:DEBUG:bot: Help cog is ready!
+2021-09-29 15:42:46,064:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:42:46,064:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:42:46,064:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:42:46,064:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:42:46,064:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:43:38,104:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:43:38,163:DEBUG:bot: Cogs Loaded
+2021-09-29 15:43:40,846:DEBUG:bot: Help cog is ready!
+2021-09-29 15:43:40,846:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:43:40,846:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:43:40,846:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:43:40,846:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:43:40,847:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:45:10,009:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:45:10,067:DEBUG:bot: Cogs Loaded
+2021-09-29 15:45:12,622:DEBUG:bot: Help cog is ready!
+2021-09-29 15:45:12,622:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:45:12,622:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:45:12,622:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:45:12,622:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:45:12,622:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:47:43,670:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:47:43,730:DEBUG:bot: Cogs Loaded
+2021-09-29 15:47:46,405:DEBUG:bot: Help cog is ready!
+2021-09-29 15:47:46,405:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:47:46,405:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:47:46,405:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:47:46,405:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:47:46,405:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:48:11,559:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:48:11,618:DEBUG:bot: Cogs Loaded
+2021-09-29 15:48:14,193:DEBUG:bot: Help cog is ready!
+2021-09-29 15:48:14,194:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:48:14,194:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:48:14,194:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:48:14,194:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:48:14,194:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:50:33,591:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:50:33,649:DEBUG:bot: Cogs Loaded
+2021-09-29 15:50:36,264:DEBUG:bot: Help cog is ready!
+2021-09-29 15:50:36,264:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:50:36,264:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:50:36,264:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:50:36,265:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:50:36,265:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:52:09,855:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:52:09,915:DEBUG:bot: Cogs Loaded
+2021-09-29 15:52:12,482:DEBUG:bot: Help cog is ready!
+2021-09-29 15:52:12,482:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:52:12,482:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:52:12,482:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:52:12,482:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:52:12,483:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:52:18,142:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:52:18,201:DEBUG:bot: Cogs Loaded
+2021-09-29 15:52:20,797:DEBUG:bot: Help cog is ready!
+2021-09-29 15:52:20,797:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:52:20,797:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:52:20,797:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:52:20,798:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:52:20,798:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:53:15,962:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:53:16,023:DEBUG:bot: Cogs Loaded
+2021-09-29 15:53:18,659:DEBUG:bot: Help cog is ready!
+2021-09-29 15:53:18,659:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:53:18,659:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:53:18,660:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:53:18,660:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:53:18,660:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:54:42,797:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:54:42,847:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 64)
+2021-09-29 15:54:42,852:DEBUG:bot: Cogs Loaded
+2021-09-29 15:54:45,419:DEBUG:bot: Help cog is ready!
+2021-09-29 15:54:45,419:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:54:45,419:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:54:45,419:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:54:45,419:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:55:57,204:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:55:57,264:DEBUG:bot: Cogs Loaded
+2021-09-29 15:55:59,857:DEBUG:bot: Help cog is ready!
+2021-09-29 15:55:59,857:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:55:59,857:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:55:59,857:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:55:59,857:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:55:59,858:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:57:27,666:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:57:27,723:DEBUG:bot: Cogs Loaded
+2021-09-29 15:57:30,335:DEBUG:bot: Help cog is ready!
+2021-09-29 15:57:30,335:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:57:30,335:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:57:30,335:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:57:30,336:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:57:30,336:DEBUG:bot: Dev cog is ready!
+2021-09-29 15:58:59,979:DEBUG:bot: ========================RESTART===========================
+2021-09-29 15:59:00,037:DEBUG:bot: Cogs Loaded
+2021-09-29 15:59:02,662:DEBUG:bot: Help cog is ready!
+2021-09-29 15:59:02,662:DEBUG:bot: Homework cog is ready!
+2021-09-29 15:59:02,662:DEBUG:bot: Lessons cog is ready!
+2021-09-29 15:59:02,662:DEBUG:bot: Commands cog is ready!
+2021-09-29 15:59:02,662:DEBUG:bot: Setup cog is ready!
+2021-09-29 15:59:02,662:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:00:26,029:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:00:26,091:DEBUG:bot: Cogs Loaded
+2021-09-29 16:00:28,665:DEBUG:bot: Help cog is ready!
+2021-09-29 16:00:28,665:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:00:28,665:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:00:28,665:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:00:28,666:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:00:28,666:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:00:43,409:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:00:43,459:DEBUG:bot: Cogs Loaded
+2021-09-29 16:00:46,091:DEBUG:bot: Help cog is ready!
+2021-09-29 16:00:46,091:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:00:46,091:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:00:46,091:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:00:46,091:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:00:46,091:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:03:04,957:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:03:05,017:DEBUG:bot: Cogs Loaded
+2021-09-29 16:03:07,575:DEBUG:bot: Help cog is ready!
+2021-09-29 16:03:07,575:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:03:07,575:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:03:07,575:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:03:07,575:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:03:07,576:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:05:56,302:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:05:56,387:DEBUG:bot: Cogs Loaded
+2021-09-29 16:05:59,046:DEBUG:bot: Help cog is ready!
+2021-09-29 16:05:59,046:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:05:59,046:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:05:59,046:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:05:59,047:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:05:59,047:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:07:56,962:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:07:57,011:DEBUG:bot: Cogs Loaded
+2021-09-29 16:07:59,648:DEBUG:bot: Help cog is ready!
+2021-09-29 16:07:59,648:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:07:59,648:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:07:59,648:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:07:59,648:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:07:59,648:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:08:27,974:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:08:28,033:DEBUG:bot: Cogs Loaded
+2021-09-29 16:08:30,646:DEBUG:bot: Help cog is ready!
+2021-09-29 16:08:30,646:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:08:30,646:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:08:30,647:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:08:30,647:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:08:30,647:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:10:08,008:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:10:08,067:DEBUG:bot: Cogs Loaded
+2021-09-29 16:10:10,675:DEBUG:bot: Help cog is ready!
+2021-09-29 16:10:10,675:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:10:10,675:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:10:10,675:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:10:10,675:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:10:10,675:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:10:54,347:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:10:54,405:DEBUG:bot: Cogs Loaded
+2021-09-29 16:10:57,021:DEBUG:bot: Help cog is ready!
+2021-09-29 16:10:57,021:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:10:57,021:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:10:57,021:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:10:57,021:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:10:57,021:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:13:35,983:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:13:36,041:DEBUG:bot: Cogs Loaded
+2021-09-29 16:13:38,743:DEBUG:bot: Help cog is ready!
+2021-09-29 16:13:38,744:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:13:38,744:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:13:38,744:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:13:38,744:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:13:38,744:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:19:43,194:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:19:43,252:DEBUG:bot: Cogs Loaded
+2021-09-29 16:19:45,848:DEBUG:bot: Help cog is ready!
+2021-09-29 16:19:45,848:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:19:45,848:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:19:45,848:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:19:45,848:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:19:45,848:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:34:21,385:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:34:21,445:DEBUG:bot: Cogs Loaded
+2021-09-29 16:34:24,099:DEBUG:bot: Help cog is ready!
+2021-09-29 16:34:24,099:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:34:24,099:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:34:24,099:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:34:24,099:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:34:24,100:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:34:58,870:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:34:58,928:DEBUG:bot: Cogs Loaded
+2021-09-29 16:35:01,716:DEBUG:bot: Help cog is ready!
+2021-09-29 16:35:01,716:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:35:01,716:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:35:01,717:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:35:01,717:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:35:01,717:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:44:33,065:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:44:33,124:DEBUG:bot: Cogs Loaded
+2021-09-29 16:44:35,725:DEBUG:bot: Help cog is ready!
+2021-09-29 16:44:35,725:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:44:35,725:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:44:35,725:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:44:35,725:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:44:35,726:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:45:33,124:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:45:33,184:DEBUG:bot: Cogs Loaded
+2021-09-29 16:45:35,839:DEBUG:bot: Help cog is ready!
+2021-09-29 16:45:35,839:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:45:35,839:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:45:35,839:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:45:35,839:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:45:35,840:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:47:01,964:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:47:02,024:DEBUG:bot: Cogs Loaded
+2021-09-29 16:47:04,626:DEBUG:bot: Help cog is ready!
+2021-09-29 16:47:04,626:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:47:04,626:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:47:04,626:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:47:04,626:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:47:04,626:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:47:32,630:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:47:32,685:DEBUG:bot: Cogs Loaded
+2021-09-29 16:47:35,274:DEBUG:bot: Help cog is ready!
+2021-09-29 16:47:35,274:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:47:35,274:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:47:35,274:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:47:35,274:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:47:35,275:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:47:55,016:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:47:55,074:DEBUG:bot: Cogs Loaded
+2021-09-29 16:47:57,687:DEBUG:bot: Help cog is ready!
+2021-09-29 16:47:57,687:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:47:57,687:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:47:57,687:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:47:57,687:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:47:57,687:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:49:18,492:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:49:18,548:DEBUG:bot: Cogs Loaded
+2021-09-29 16:49:21,110:DEBUG:bot: Help cog is ready!
+2021-09-29 16:49:21,110:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:49:21,110:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:49:21,110:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:49:21,111:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:49:21,111:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:50:43,909:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:50:43,967:DEBUG:bot: Cogs Loaded
+2021-09-29 16:50:46,576:DEBUG:bot: Help cog is ready!
+2021-09-29 16:50:46,576:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:50:46,576:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:50:46,576:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:50:46,577:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:50:46,577:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:53:55,726:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:53:55,786:DEBUG:bot: Cogs Loaded
+2021-09-29 16:53:58,436:DEBUG:bot: Help cog is ready!
+2021-09-29 16:53:58,437:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:53:58,437:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:53:58,437:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:53:58,437:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:53:58,437:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:55:49,612:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:55:49,668:DEBUG:bot: Cogs Loaded
+2021-09-29 16:55:52,283:DEBUG:bot: Help cog is ready!
+2021-09-29 16:55:52,283:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:55:52,283:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:55:52,283:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:55:52,283:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:55:52,283:DEBUG:bot: Dev cog is ready!
+2021-09-29 16:56:31,304:DEBUG:bot: ========================RESTART===========================
+2021-09-29 16:56:31,361:DEBUG:bot: Cogs Loaded
+2021-09-29 16:56:33,999:DEBUG:bot: Help cog is ready!
+2021-09-29 16:56:33,999:DEBUG:bot: Homework cog is ready!
+2021-09-29 16:56:33,999:DEBUG:bot: Lessons cog is ready!
+2021-09-29 16:56:33,999:DEBUG:bot: Commands cog is ready!
+2021-09-29 16:56:34,000:DEBUG:bot: Setup cog is ready!
+2021-09-29 16:56:34,000:DEBUG:bot: Dev cog is ready!
+2021-09-29 17:10:32,232:DEBUG:bot: ========================RESTART===========================
+2021-09-29 17:10:32,290:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: closing parenthesis ')' does not match opening parenthesis '[' on line 98 (lessons.py, line 102)
+2021-09-29 17:10:32,295:DEBUG:bot: Cogs Loaded
+2021-09-29 17:10:34,917:DEBUG:bot: Help cog is ready!
+2021-09-29 17:10:34,917:DEBUG:bot: Homework cog is ready!
+2021-09-29 17:10:34,918:DEBUG:bot: Commands cog is ready!
+2021-09-29 17:10:34,918:DEBUG:bot: Setup cog is ready!
+2021-09-29 17:10:34,918:DEBUG:bot: Dev cog is ready!
+2021-09-29 17:12:45,028:DEBUG:bot: ========================RESTART===========================
+2021-09-29 17:12:45,079:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: TypeError: <discord_slash.model.CogBaseCommandObject object at 0x0000028D0DE592E0> is not a callable object
+2021-09-29 17:12:45,086:DEBUG:bot: Cogs Loaded
+2021-09-29 17:12:47,674:DEBUG:bot: Help cog is ready!
+2021-09-29 17:12:47,674:DEBUG:bot: Homework cog is ready!
+2021-09-29 17:12:47,674:DEBUG:bot: Commands cog is ready!
+2021-09-29 17:12:47,674:DEBUG:bot: Setup cog is ready!
+2021-09-29 17:12:47,674:DEBUG:bot: Dev cog is ready!
+2021-09-29 18:15:20,898:DEBUG:bot: ========================RESTART===========================
+2021-09-29 18:15:20,951:DEBUG:bot: Cogs Loaded
+2021-09-29 18:15:23,592:DEBUG:bot: Help cog is ready!
+2021-09-29 18:15:23,592:DEBUG:bot: Homework cog is ready!
+2021-09-29 18:15:23,592:DEBUG:bot: Lessons cog is ready!
+2021-09-29 18:15:23,592:DEBUG:bot: Commands cog is ready!
+2021-09-29 18:15:23,592:DEBUG:bot: Setup cog is ready!
+2021-09-29 18:15:23,593:DEBUG:bot: Dev cog is ready!

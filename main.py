@@ -35,13 +35,14 @@ def setupLogging():
 @bot.event
 async def on_message(msg):
     try:
-        await bot.process_commands(msg) #This is so when a message is sent in the server
+        await bot.process_commands(msg) #This is so when a message is sent in the server the bot can process if its a command or not
     except Exception as e:
         print(f"Error proccessing commands: {e}")
 
 
 
 
+ 
  
 
     
