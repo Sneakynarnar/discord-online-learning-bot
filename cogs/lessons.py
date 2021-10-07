@@ -19,11 +19,15 @@ guild_ids = [836901717160886292, 883409165391896626,884796354390523974]
 logger = logging.getLogger("bot")
 con = sqlite3.connect("resources/databases/schooldata.db")
 cur = con.cursor()
-
+#This is a change
 class Lessons(commands.Cog):
         def __init__(self, bot):
             self.bot   = bot
         
+
+        def get_lesson(self, id): # Returns the Lesson object from an ID
+            cur.execute("SELECT * FROM lessons WHERE classId = ?", (id,))
+            return self.Lesson(cur.fetchone())
         def generateId(self):
             while True: 
                 lessonId = random.randint(0, 100000000000000)
@@ -39,14 +43,42 @@ class Lessons(commands.Cog):
             def __init__(self, payload):
                 
                 self.id = payload[0]
-                self.guild_id = payload[1]
+                self.guild = self.bot.get_guild(payload[1])
                 self.name = payload[2]
                 self.dateTime = payload[3]
                 self.subject = payload[4]
-                self.teacher_id = payload[5]
+                self.teacher_id = self.guild.get_member(payload[5])
                 self.repeatWeekly = payload[6]
                 self.description = payload[7]
                 self.students = []
+    
+            def fetch_students(self):
+                cur.execute("SELECT studentId FROM studentLessons WHERE classId = ? AND guildId = ?", self.id, self.guild.id)
+                records = cur.fetchall()
+                students = [self.guild.get_member(x[0]) for x in records]
+                return students
+            async def start(self):
+                students = self.fetch_students()
+                cur.execute("SELECT activeLessonsCatagory FROM schoolGuilds WHERE guildID = ?", (self.guild.id))
+                activeLessonCat = cur.fetchone()
+                activeLessonCat = self.guild.get_channel(activeLessonCat[0])
+
+                voice = activeLessonCat.create_voice_channel(name=self.name)
+                role = self.guild.create_role(name=self.name)
+                overwrites = {
+                    
+                    role: discord.PermissionOverwrite(read_messages=True)
+                }
+                embed= discord.Embed(title="Your Lesson is starting now!", description=f"{self.name} is starting now!" )
+                embed.add_field(name="Voice channel", description=f"Join the voice channel by clicking this link > {voice.mention}")
+                
+
+                for student in students:
+                    student.add_roles(role)
+                    await ctx.send(embed=embed)
+                
+                
+
                 
 
         @commands.Cog.listener()
@@ -168,7 +200,7 @@ class Lessons(commands.Cog):
             students = [student, student1, student2, student3, student4, student5]
             cur.execute("SELECT * FROM lessons WHERE teacherId = ? AND name = ?", (ctx.author.id, class_name))
             record = cur.fetchone()
-            print(record)
+        
             if record is None:
                 await ctx.send("You have no classes with that name! To see your lessons do /listlessons or to create a new one do /createlesson")
                 return
@@ -266,6 +298,21 @@ class Lessons(commands.Cog):
             else:
                 return None
 
+
+
+
+
+        @tasks.loop(seconds=60)
+        async def checkForLesson(self):
+            now = datetime.utcnow()
+            frmt = "%Y-%m-%d %h-%m-00"
+
+            nowstrf = now.strftime(frmt)
+            cur.execute("SELECT * FROM lessons WHERE dateTime = ?",(nowstrf, ))
+            records = cur.fetchall()
+            for record in records:
+                lesson = self.Lesson(record)
+                await lesson.start()
 
 def setup(bot):
     bot.add_cog(Lessons(bot))
