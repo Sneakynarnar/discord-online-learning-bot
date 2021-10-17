@@ -1,0 +1,127 @@
+2021-10-12 20:39:06,475:DEBUG:bot: ========================RESTART===========================
+2021-10-12 20:39:06,654:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 20:40:00,818:DEBUG:bot: ========================RESTART===========================
+2021-10-12 20:40:00,865:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 20:40:00,878:DEBUG:bot: Cogs Loaded
+2021-10-12 20:40:03,663:DEBUG:bot: Help cog is ready!
+2021-10-12 20:40:03,663:DEBUG:bot: Homework cog is ready!
+2021-10-12 20:40:03,663:DEBUG:bot: Commands cog is ready!
+2021-10-12 20:40:03,663:DEBUG:bot: Setup cog is ready!
+2021-10-12 20:40:03,664:DEBUG:bot: Dev cog is ready!
+2021-10-12 20:41:43,240:DEBUG:bot: ========================RESTART===========================
+2021-10-12 20:41:43,285:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 20:41:43,290:DEBUG:bot: Cogs Loaded
+2021-10-12 20:41:45,864:DEBUG:bot: Help cog is ready!
+2021-10-12 20:41:45,864:DEBUG:bot: Homework cog is ready!
+2021-10-12 20:41:45,864:DEBUG:bot: Commands cog is ready!
+2021-10-12 20:41:45,864:DEBUG:bot: Setup cog is ready!
+2021-10-12 20:41:45,864:DEBUG:bot: Dev cog is ready!
+2021-10-12 20:42:10,753:DEBUG:bot: ========================RESTART===========================
+2021-10-12 20:42:10,795:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 20:42:10,800:DEBUG:bot: Error loading commands Exception: Extension 'cogs.commands' raised an error: SyntaxError: invalid syntax (commands.py, line 24)
+2021-10-12 20:42:10,804:DEBUG:bot: Cogs Loaded
+2021-10-12 20:42:13,385:DEBUG:bot: Help cog is ready!
+2021-10-12 20:42:13,385:DEBUG:bot: Homework cog is ready!
+2021-10-12 20:42:13,385:DEBUG:bot: Setup cog is ready!
+2021-10-12 20:42:13,385:DEBUG:bot: Dev cog is ready!
+2021-10-12 20:42:44,605:DEBUG:bot: ========================RESTART===========================
+2021-10-12 20:42:44,651:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 20:42:44,663:DEBUG:bot: Cogs Loaded
+2021-10-12 20:42:47,466:DEBUG:bot: Help cog is ready!
+2021-10-12 20:42:47,466:DEBUG:bot: Homework cog is ready!
+2021-10-12 20:42:47,466:DEBUG:bot: Commands cog is ready!
+2021-10-12 20:42:47,466:DEBUG:bot: Setup cog is ready!
+2021-10-12 20:42:47,466:DEBUG:bot: Dev cog is ready!
+2021-10-12 20:55:24,237:DEBUG:bot: Help cog is ready!
+2021-10-12 20:55:24,237:DEBUG:bot: Homework cog is ready!
+2021-10-12 20:55:24,237:DEBUG:bot: Commands cog is ready!
+2021-10-12 20:55:24,237:DEBUG:bot: Setup cog is ready!
+2021-10-12 20:55:24,237:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:20:01,481:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:20:01,525:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:20:01,531:DEBUG:bot: Error loading commands Exception: Extension 'cogs.commands' raised an error: SyntaxError: invalid syntax (commands.py, line 35)
+2021-10-12 21:20:01,535:DEBUG:bot: Cogs Loaded
+2021-10-12 21:20:04,149:DEBUG:bot: Help cog is ready!
+2021-10-12 21:20:04,149:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:20:04,149:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:20:04,149:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:21:14,448:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:21:14,506:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:21:14,512:DEBUG:bot: Error loading commands Exception: Extension 'cogs.commands' raised an error: SyntaxError: invalid syntax (commands.py, line 40)
+2021-10-12 21:21:14,516:DEBUG:bot: Cogs Loaded
+2021-10-12 21:21:17,079:DEBUG:bot: Help cog is ready!
+2021-10-12 21:21:17,079:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:21:17,079:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:21:17,079:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:21:40,252:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:21:40,297:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:21:40,302:DEBUG:bot: Error loading commands Exception: Extension 'cogs.commands' raised an error: SyntaxError: invalid syntax (commands.py, line 44)
+2021-10-12 21:21:40,306:DEBUG:bot: Cogs Loaded
+2021-10-12 21:21:43,288:DEBUG:bot: Help cog is ready!
+2021-10-12 21:21:43,288:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:21:43,288:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:21:43,288:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:22:12,703:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:22:12,746:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:22:12,753:DEBUG:bot: Error loading commands Exception: Extension 'cogs.commands' raised an error: SyntaxError: invalid syntax (commands.py, line 53)
+2021-10-12 21:22:12,756:DEBUG:bot: Cogs Loaded
+2021-10-12 21:22:15,332:DEBUG:bot: Help cog is ready!
+2021-10-12 21:22:15,332:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:22:15,332:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:22:15,332:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:23:59,245:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:23:59,290:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:23:59,296:DEBUG:bot: Cogs Loaded
+2021-10-12 21:24:01,927:DEBUG:bot: Help cog is ready!
+2021-10-12 21:24:01,928:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:24:01,928:DEBUG:bot: Commands cog is ready!
+2021-10-12 21:24:01,928:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:24:01,928:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:24:31,616:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:24:31,657:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:24:31,663:DEBUG:bot: Error loading commands Exception: Extension 'cogs.commands' raised an error: SyntaxError: invalid syntax (commands.py, line 35)
+2021-10-12 21:24:31,666:DEBUG:bot: Cogs Loaded
+2021-10-12 21:24:34,273:DEBUG:bot: Help cog is ready!
+2021-10-12 21:24:34,273:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:24:34,273:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:24:34,273:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:24:35,931:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:24:35,975:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:24:35,985:DEBUG:bot: Cogs Loaded
+2021-10-12 21:24:44,719:DEBUG:bot: Help cog is ready!
+2021-10-12 21:24:44,719:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:24:44,719:DEBUG:bot: Commands cog is ready!
+2021-10-12 21:24:44,719:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:24:44,719:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:25:54,805:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:25:54,849:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:25:54,860:DEBUG:bot: Cogs Loaded
+2021-10-12 21:25:57,507:DEBUG:bot: Help cog is ready!
+2021-10-12 21:25:57,507:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:25:57,507:DEBUG:bot: Commands cog is ready!
+2021-10-12 21:25:57,507:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:25:57,507:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:26:27,173:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:26:27,217:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:26:27,228:DEBUG:bot: Cogs Loaded
+2021-10-12 21:26:29,846:DEBUG:bot: Help cog is ready!
+2021-10-12 21:26:29,846:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:26:29,846:DEBUG:bot: Commands cog is ready!
+2021-10-12 21:26:29,846:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:26:29,846:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:28:23,486:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:28:23,537:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:28:23,548:DEBUG:bot: Cogs Loaded
+2021-10-12 21:28:26,199:DEBUG:bot: Help cog is ready!
+2021-10-12 21:28:26,199:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:28:26,199:DEBUG:bot: Commands cog is ready!
+2021-10-12 21:28:26,199:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:28:26,200:DEBUG:bot: Dev cog is ready!
+2021-10-12 21:29:02,634:DEBUG:bot: ========================RESTART===========================
+2021-10-12 21:29:02,682:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: invalid syntax (lessons.py, line 107)
+2021-10-12 21:29:02,694:DEBUG:bot: Cogs Loaded
+2021-10-12 21:29:05,280:DEBUG:bot: Help cog is ready!
+2021-10-12 21:29:05,280:DEBUG:bot: Homework cog is ready!
+2021-10-12 21:29:05,280:DEBUG:bot: Commands cog is ready!
+2021-10-12 21:29:05,280:DEBUG:bot: Setup cog is ready!
+2021-10-12 21:29:05,280:DEBUG:bot: Dev cog is ready!

@@ -157,7 +157,7 @@ class Help(commands.Cog):
                 
                 channels = cur.fetchall()
                 occupiedChannels = [x[0] for x in channels]
-                print(occupiedChannels)
+
                 if msg.channel.category == avaliable:
                     logger.debug("Recognised avaliable channel")
                     msgList = msg.content.split()

@@ -6,7 +6,10 @@ cur = con.cursor()
 #cur.execute("DELETE FROM subjects")
 #cur.execute("DROP TABLE helpLevels")
 #cur.execute("DROP TABLE lessons")
-cur.execute("ALTER TABLE studentLessons ADD guildId integer ")
+
+
+
+cur.execute("DELETE FROM lessons")
 #cur.execute("DELETE FROM helpLevels")
 #cur.execute("CREATE TABLE lessons (classId integer PRIMARY_KEY, guildId integer, name text, dateTime datetime, subject text, teacherId integer, repeatWeekly bool)")
 #cur.execute("CREATE TABLE studentLessons (studentId integer, classId integer)")

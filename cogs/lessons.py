@@ -1,4 +1,5 @@
 import discord
+import asyncio
 from discord import File
 from discord.ext import commands, tasks
 import sqlite3
@@ -23,14 +24,14 @@ cur = con.cursor()
 class Lessons(commands.Cog):
         def __init__(self, bot):
             self.bot   = bot
-        
+            self.activeLessons = {}
 
         def get_lesson(self, id): # Returns the Lesson object from an ID
             cur.execute("SELECT * FROM lessons WHERE classId = ?", (id,))
-            return self.Lesson(cur.fetchone())
+            return self.Lesson(cur.fetchone(), self.bot)
         def generateId(self):
             while True: 
-                lessonId = random.randint(0, 100000000000000)
+                lessonId = random.randint(100000000000000, 9999999999999999)
                 cur.execute("SELECT * FROM lessons WHERE classId = ?", (lessonId,))
 
                 if cur.fetchone() is None:
@@ -40,50 +41,140 @@ class Lessons(commands.Cog):
                     continue
         class Lesson():
 
-            def __init__(self, payload):
-                
+            def __init__(self, payload, bot):
+                self.bot = bot
                 self.id = payload[0]
-                self.guild = self.bot.get_guild(payload[1])
+                self.guild = bot.get_guild(payload[1])
                 self.name = payload[2]
                 self.dateTime = payload[3]
                 self.subject = payload[4]
-                self.teacher_id = self.guild.get_member(payload[5])
+                self.teacher = self.guild.get_member(payload[5])
                 self.repeatWeekly = payload[6]
                 self.description = payload[7]
-                self.students = []
+                self.lessonDuration = payload[8]
+                self.vc = payload[9] # voice chat
+                self.tc = payload[10] # text chat
+                self.embedMessage = payload[11]
     
             def fetch_students(self):
-                cur.execute("SELECT studentId FROM studentLessons WHERE classId = ? AND guildId = ?", self.id, self.guild.id)
+                cur.execute("SELECT studentId FROM studentLessons WHERE classId = ? AND guildId = ?", (self.id, self.guild.id))
                 records = cur.fetchall()
                 students = [self.guild.get_member(x[0]) for x in records]
                 return students
+            
             async def start(self):
-                students = self.fetch_students()
-                cur.execute("SELECT activeLessonsCatagory FROM schoolGuilds WHERE guildID = ?", (self.guild.id))
-                activeLessonCat = cur.fetchone()
-                activeLessonCat = self.guild.get_channel(activeLessonCat[0])
 
-                voice = activeLessonCat.create_voice_channel(name=self.name)
-                role = self.guild.create_role(name=self.name)
+                students = self.fetch_students()
+
+                cur.execute("SELECT activeLessonsCategoryId, waitingRoomId FROM schoolGuilds WHERE guildID = ?", (self.guild.id,))
+                records = cur.fetchone()
+                activeLessonCat = self.guild.get_channel(records[0])
+                waitingRoom = self.guild.get_channel(records[1])
+
+                
+                role = await self.guild.create_role(name=self.name)
                 overwrites = {
-                    
+                    self.guild.default_role: discord.PermissionOverwrite(read_messages=False),
                     role: discord.PermissionOverwrite(read_messages=True)
                 }
-                embed= discord.Embed(title="Your Lesson is starting now!", description=f"{self.name} is starting now!" )
-                embed.add_field(name="Voice channel", description=f"Join the voice channel by clicking this link > {voice.mention}")
+                self.vc = await activeLessonCat.create_voice_channel(name=self.name, overwrites=overwrites)
                 
+                self.tc = await activeLessonCat.create_text_channel(name=self.name+"-text", overwrites=overwrites)
+                embed = discord.Embed(title=f"Your {self.subject} lesson is starting now!", description=f"{self.name} is starting now!" )
+                embed.add_field(name="Voice channel", value=f"Join the voice channel by clicking this link > {self.vc.mention}")
+                embed.add_field(name="Text channel", value=f"View the text channel by clicking this > {self.tc.mention}\n\n**TIP:** If you join {waitingRoom.mention} then you will automatically get moved into your lesson when it starts!")
+                infoEmbed = discord.Embed(title="Lesson Info", description=f"This lesson is being taught by {self.teacher.mention}")
+                notJoinedStudents = students
+                joinedStudents = []
+                cur.execute("UPDATE lessons SET VC = ?, TC = ?,WHERE classId = ?", (self.vc.id,self.tc.id,message.id, self.id)) # Fixing the database showing all these as NONE
+                con.commit()
 
                 for student in students:
-                    student.add_roles(role)
-                    await ctx.send(embed=embed)
-                
-                
+                    await student.add_roles(role)
+                    await student.create_dm()
+                    await student.dm_channel.send(embed=embed)
+                if self.teacher in waitingRoom.members:
+                    await self.teacher.move_to(self.vc) 
+                    await self.teacher.add_roles(role)
+                    await self.teacher.create_dm()
+                    await self.teacher.dm_channel.send(embed=embed)
+                for member in waitingRoom.members:
+                    if member in notJoinedStudents:
+                        await member.move_to(self.vc)
+                        notJoinedStudents.remove(member)
+                        joinedStudents.append(member)
 
+                students = ""
+                for student in notJoinedStudents:
+                    students += f"{student.mention}\n"
+                joinedStudentsStr = ""
+                for student in joinedStudents:
+                    joinedStudentsStr +=f"{student.mention}\n"
                 
+                joinedStudentsStr = "No students have joined yet" if len(joinedStudents) == 0 else joinedStudentsStr
+                infoEmbed.add_field(name="Students who have joined", value=joinedStudentsStr,inline=False)
+                infoEmbed.add_field(name="Students who haven't joined",value=students, inline=False)             
+
+                message = await self.tc.send(embed=infoEmbed)
+
+                print("got this far")
+                await asyncio.sleep((self.lessonDuration+5)*60)
+                self.vc.delete()
+                self.tc.delete()
+                cur.execute("DELETE FROM lessons WHERE classId = ?", (self.id,))
+                for student in students:
+                    await student.remove_roles(role)
+                con.commit()
+                
+                
+        @commands.Cog.listener()
+        async def on_voice_state_update(self, member, before, after):
+            if not (after.deaf or after.mute or after.self_deaf or after.self_mute or after.self_stream or after.self_video) :
+                cur.execute("SELECT activeLessonsCategoryId FROM schoolGuilds WHERE guildID = ?", (member.guild.id,))
+                activeLessonsCat = cur.fetchone()
+                activeLessonsCat = member.guild.get_channel(activeLessonsCat[0])
+                if after.channel in activeLessonsCat.channels or before.channel in activeLessonsCat.channels:
+                    if after.channel in activeLessonsCat.channels:
+                        lessonChannel = after.channel
+                    elif before.channel in activeLessonsCat.channels:
+                        lessonChannel = before.channel
+
+                    cur.execute("SELECT * FROM lessons WHERE VC = ?", (lessonChannel.id,))
+                    payload = cur.fetchone()
+                    lesson = self.Lesson(payload, self.bot)
+                    message =await lesson.tc.fetch_message(lesson.embedMessage)
+                    embed = message.embed
+                    notJoinedStudents = lessons.fetch_students()
+
+                    joinedStudents = lesson.vc.members
+
+                    joinedStudents.remove(lesson.teacher)
+
+                    for student in notJoinedStudents:
+                        if student in joinedStudents:
+                            notJoinedStudents.remove(student)
+                    
+
+                        embed.set_field_at(3, name="Students Who have joined", value=self.formatMembers(joinedStudents))
+                        embed.set_field_at(4, name="Students Who haven't joined", value=self.formatMembers(notJoinedStudents))
+
+                    if before.channel in activeLessonsCat.channels:
+                        l
+                        await lesson.teacher.create_dm
+                        await lesson.teacher.dm_channel.send(f"{member.nick} just left the call!")
+                        await lesson.tc.send(f"{member.nick} just left the call!")
+                    
+                    return
+
+
+
+
+
 
         @commands.Cog.listener()
         async def on_ready(self):
             logger.debug("Lessons cog is ready!")
+            self.checkForLesson.start()
         async def waitForMessage():
             def check(m):
                 return m.author == ctx.author and m.channel == ctx.author.dm_channel
@@ -98,7 +189,7 @@ class Lessons(commands.Cog):
             name = name.lower()
             
             cur.execute("SELECT * FROM lessons WHERE guildId = ? AND LOWER(name) = ? ", (ctx.guild.id, name))
-            lesson = self.Lesson(cur.fetchone())
+            lesson = self.Lesson(cur.fetchone(), self.bot)
             time = datetime.fromisoformat(lesson.dateTime)
 
             if lesson.repeatWeekly:
@@ -110,48 +201,12 @@ class Lessons(commands.Cog):
 
             info =f"**{lesson.subject}**\nDescription: {lesson.description}\n\nTime: {time}"
             embed = discord.Embed(title=lesson.name, description=info)
-            teacher = ctx.guild.get_member(lesson.teacher_id)
+            teacher = lesson.teacher
             embed.add_field(name="Teacher", value=f"{teacher.mention}")
             cur.execute("SELECT studentId FROM studentLessons WHERE classId = ?", (lesson.id,))
             records = cur.fetchall()
             members = [ [ctx.guild.get_member(x[0]).name, ctx.guild.get_member(x[0])] for x in records]
-            def take_second(elem):
-                return elem[0]
-            members = sorted(members, key=take_second)
-            ROWS = 2
-
-            rem = len(members) % ROWS
-            if rem == 0:
-                columns = int((len(members) /ROWS))
-            else:
-                columns = int((len(members)//ROWS) + 1)
-            students = ""
-            members.sort()
-            total = 0
-            for name in members:
-                maxLength = len(name) #getting the longest name
-                total+= len(name)
-
-            averageLength= total/ len(members)
-            upperQuartile = (maxLength + averageLength) / 2
-            totalCharacters = upperQuartile + 12
-
-            for x in range(ROWS):
-                studentrow = ""
-                for y in range(columns):
-                    index =x+(ROWS*y)
-
-                    
-                    if index > len(members)-1:
-                        break
-                    name = members[index][0]
-                    member = members[index][1]
-                    spaces = int(totalCharacters - len(name))
-                    whitespace = ""
-                    whitespace += " "*spaces
-
-                    studentrow+= member.mention+whitespace
-                students += studentrow + "\n"
+            students = await self.formatMembers(members)
 
 
             embed.add_field(name="Students", value=students, inline=False)
@@ -206,20 +261,23 @@ class Lessons(commands.Cog):
                 return
             
             
-            lesson = self.Lesson(record)
+            lesson = self.Lesson(record, self.bot)
             for student in students:
                 if student is not None:
-                    cur.execute("INSERT INTO studentLessons VALUES (?,?,?)", (student.id, lesson.id, ctx.guild.id))
+                    cur.execute("SELECT * FROM studentLessons WHERE studentId = ? AND classId = ?", (student.id, lesson.id))
+                    if cur.fetchone() is None:
+                        cur.execute("INSERT INTO studentLessons VALUES (?,?,?)", (student.id, lesson.id, ctx.guild.id))
             
-            await ctx.send("All students have beeen added run the command to add more!")
+            await ctx.send("All students have beeen added run the command again to add more!")
             con.commit()
         
         @cog_ext.cog_slash(name="createlesson", description="Creates a lesson", guild_ids=guild_ids, options = [create_option(name="name",description="The name of the Lesson (must be unique)", required=True, option_type=3),
                                                                                                                 create_option(name="subject",description="The subject of the lesson", required=True, option_type=3), 
                                                                                                                 create_option(name="time", description="The time of the event in the format DD/MM/YYYY HH:MM", required=True, option_type=3),
+                                                                                                                create_option(name="duration", description="How many minutes the lesson goes on for", required=True, option_type=4),
                                                                                                                 create_option(name="repeat_weekly", description="Sets whether the lesson repeats this time and day every week", required=True, option_type=5),
                                                                                                                 create_option(name="description", description="Anything you want to say about the lesson", required=True, option_type=3)])   
-        async def createLesson(self, ctx: discord_slash.SlashContext, name, subject, time, repeat_weekly, description):
+        async def createLesson(self, ctx: discord_slash.SlashContext, name, subject, time, duration, repeat_weekly, description):
             
             dateMatch = re.match("(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})", time)
             if dateMatch:
@@ -251,10 +309,10 @@ class Lessons(commands.Cog):
                 return  
 
 
-            payload =(self.generateId(), ctx.guild.id, name, time, subject, ctx.author.id, repeat_weekly, description)
-            newLesson = self.Lesson(payload) # Creating a lesoon object
-           
-            cur.execute("INSERT INTO lessons VALUES (?,?,?,?,?,?,?,?)", payload)
+            payload =(self.generateId(), ctx.guild.id, name, time, subject, ctx.author.id, repeat_weekly, description, duration, None, None, None,)
+            newLesson = self.Lesson(payload, self.bot) # Creating a lesoon object
+            print(len(payload))
+            cur.execute("INSERT INTO lessons VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", payload)
             con.commit()
             await ctx.send(f"Created new {newLesson.subject} lesson at {newLesson.dateTime}!")
 
@@ -278,7 +336,7 @@ class Lessons(commands.Cog):
                 embed.set_footer(text=text)
                 counter = 1
                 for lesson in lessons:
-                    lesson = self.Lesson(lesson)
+                    lesson = self.Lesson(lesson, self.bot)
                     if counter > (8 * (page - 1)) and counter < ((page * 8)+1):
                         time = datetime.fromisoformat(lesson.dateTime)
                         if lesson.repeatWeekly:
@@ -304,15 +362,75 @@ class Lessons(commands.Cog):
 
         @tasks.loop(seconds=60)
         async def checkForLesson(self):
+            
             now = datetime.utcnow()
-            frmt = "%Y-%m-%d %h-%m-00"
-
+            
+            now = now + timedelta(minutes=1) + timedelta(hours=1)
+            now = datetime(now.year, now.month, now.day, 22, 20, 0)
+            frmt = "%Y-%m-%d %H:%M:00"
+            print("checking..")
+            cur.execute("SELECT * FROM lessons")
             nowstrf = now.strftime(frmt)
-            cur.execute("SELECT * FROM lessons WHERE dateTime = ?",(nowstrf, ))
+            cur.execute("SELECT * FROM lessons WHERE dateTime = ?",(nowstrf,))
             records = cur.fetchall()
             for record in records:
-                lesson = self.Lesson(record)
+
+                lesson = self.Lesson(record, self.bot)
+                print("starting")
                 await lesson.start()
+                
+        @checkForLesson.before_loop
+        async def before_check(self):
+
+            await self.bot.wait_until_ready()
+            now = datetime.utcnow()
+            future = datetime(now.year, now.month, now.day, now.hour, now.minute+1, 0, 0)
+            print("Sleeping for {0} seconds".format((future - now).seconds))
+            await asyncio.sleep((future - now).seconds)
+
+
+        async def formatMembers(self, members):
+            if len(members) == 0:
+                return "No students yet"
+            def take_second(elem):
+                return elem[0]
+            members = sorted(members, key=take_second)
+            ROWS = 2
+
+            rem = len(members) % ROWS
+            if rem == 0:
+                columns = int((len(members) /ROWS))
+            else:
+                columns = int((len(members)//ROWS) + 1)
+            students = ""
+            members.sort()
+            total = 0
+            for name in members:
+                maxLength = len(name) #getting the longest name
+                total+= len(name)
+
+            averageLength= total/ len(members)
+            upperQuartile = (maxLength + averageLength) / 2
+            totalCharacters = upperQuartile + 12
+
+            for x in range(ROWS):
+                studentrow = ""
+                for y in range(columns):
+                    index =x+(ROWS*y)
+
+                    
+                    if index > len(members)-1:
+                        break
+                    name = members[index][0]
+                    member = members[index][1]
+                    spaces = int(totalCharacters - len(name))
+                    whitespace = ""
+                    whitespace += " "*spaces
+
+                    studentrow+= member.mention+whitespace
+                students += studentrow + "\n"
+            
+            return students
 
 def setup(bot):
     bot.add_cog(Lessons(bot))

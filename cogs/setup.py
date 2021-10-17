@@ -145,9 +145,10 @@ class Setup(commands.Cog):
 
                     await guild.create_text_channel(name="Announcements")
                     generalChannels = await guild.create_category(name="General channels")
-                    await guild.create_category(name="Private Voice channels")
-                    await guild.create_category(name="Your Active lessons voice channels")
-
+                    privateVC = await guild.create_category(name="Private Voice channels")
+                    activeLessons = await guild.create_category(name="Your Active lessons voice channels")
+                    overwrites = {guild.default_role: discord.PermissionOverwrite(speak=False, stream=False,)}
+                    waitingRoom = await activeLessons.create_voice_channel(name="Waiting Room", overwrites=overwrites)
                     overwrites = {sRole: discord.PermissionOverwrite(read_messages = False)} # Students dont have the permission to read teacher channels
                     teachers = await guild.create_category(name="Teacher chat", overwrites=overwrites)
                     await asyncio.sleep(2)
@@ -174,7 +175,7 @@ class Setup(commands.Cog):
 
                     
                     # (guildID integer,schoolName text,schoolAbrieviation text,studentRoleId integer,teacherRoleId integer,managerRoleId integer)
-                    cur.execute("INSERT INTO schoolGuilds VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (int(ctx.guild.id), school_name, school_abreviation,int(sRole.id),  int(tRole.id), int(mRole.id), 0,  0, 0, 0))
+                    cur.execute("INSERT INTO schoolGuilds VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (int(ctx.guild.id), school_name, school_abreviation,int(sRole.id),  int(tRole.id), int(mRole.id), 0,  0, 0, 0, activeLessons.id, privateVC.id, waitingRoom.id))
                     embed = discord.Embed(title= "Server Set up!",)
                     embed.add_field(name="What to do now?", value="Now that all the neccesary channels have been created as long as you don't delete any or add any channels to the help categories or the active lessons catagory, feel free to customize the server how you want! If you want custom names for \
                         categories and channels feel free to do so! Add descriptions to channels to tell your students what to use the channel for, add a server picture! We recommend you delete the default channels that discord may have created because they are redundant. Change the colours of the roles or even add new roles!"
