@@ -86,23 +86,12 @@ class Lessons(commands.Cog):
                 infoEmbed = discord.Embed(title="Lesson Info", description=f"This lesson is being taught by {self.teacher.mention}")
                 notJoinedStudents = students
                 joinedStudents = []
-                cur.execute("UPDATE lessons SET VC = ?, TC = ?,WHERE classId = ?", (self.vc.id,self.tc.id,message.id, self.id)) # Fixing the database showing all these as NONE
-                con.commit()
+
 
                 for student in students:
                     await student.add_roles(role)
                     await student.create_dm()
                     await student.dm_channel.send(embed=embed)
-                if self.teacher in waitingRoom.members:
-                    await self.teacher.move_to(self.vc) 
-                    await self.teacher.add_roles(role)
-                    await self.teacher.create_dm()
-                    await self.teacher.dm_channel.send(embed=embed)
-                for member in waitingRoom.members:
-                    if member in notJoinedStudents:
-                        await member.move_to(self.vc)
-                        notJoinedStudents.remove(member)
-                        joinedStudents.append(member)
 
                 students = ""
                 for student in notJoinedStudents:
@@ -116,6 +105,19 @@ class Lessons(commands.Cog):
                 infoEmbed.add_field(name="Students who haven't joined",value=students, inline=False)             
 
                 message = await self.tc.send(embed=infoEmbed)
+                                
+                cur.execute("UPDATE lessons SET VC = ?, TC = ?, embed=? WHERE classId = ?", (self.vc.id,self.tc.id,message.id, self.id)) # Fixing the database showing all these as NONE
+                con.commit()
+                if self.teacher in waitingRoom.members:
+                    await self.teacher.move_to(self.vc) 
+                    await self.teacher.add_roles(role)
+                    await self.teacher.create_dm()
+                    await self.teacher.dm_channel.send(embed=embed)
+                for member in waitingRoom.members:
+                    if member in notJoinedStudents:
+                        await member.move_to(self.vc)
+                        notJoinedStudents.remove(member)
+                        joinedStudents.append(member)
 
                 print("got this far")
                 await asyncio.sleep((self.lessonDuration+5)*60)
@@ -142,27 +144,37 @@ class Lessons(commands.Cog):
                     cur.execute("SELECT * FROM lessons WHERE VC = ?", (lessonChannel.id,))
                     payload = cur.fetchone()
                     lesson = self.Lesson(payload, self.bot)
-                    message =await lesson.tc.fetch_message(lesson.embedMessage)
-                    embed = message.embed
-                    notJoinedStudents = lessons.fetch_students()
-
-                    joinedStudents = lesson.vc.members
-
-                    joinedStudents.remove(lesson.teacher)
+                    channel = member.guild.get_channel(lesson.tc)
+                    message =await channel.fetch_message(lesson.embedMessage)
+                    embed = message.embeds[0]
+                    notJoinedStudents = lesson.fetch_students()
+                    voice = member.guild.get_channel(lesson.vc)
+                    joinedStudents = voice.members
+                    if lesson.teacher in joinedStudents:
+                        joinedStudents.remove(lesson.teacher)
 
                     for student in notJoinedStudents:
                         if student in joinedStudents:
                             notJoinedStudents.remove(student)
                     
-
-                        embed.set_field_at(3, name="Students Who have joined", value=self.formatMembers(joinedStudents))
-                        embed.set_field_at(4, name="Students Who haven't joined", value=self.formatMembers(notJoinedStudents))
-
+                    students = ""
+                    for student in notJoinedStudents:
+                        students += f"{student.mention}\n"
+                    joinedStudentsStr = ""
+                    for student in joinedStudents:
+                        joinedStudentsStr +=f"{student.mention}\n"
+                    if joinedStudentsStr == "":
+                        joinedStudentsStr == "No students have joined yet"
+                    if students == "":
+                        students = "All students have joined!"
+                    embed.set_field_at(0, name="Students Who have joined", value=joinedStudentsStr)
+                    embed.set_field_at(1, name="Students Who haven't joined", value= students)
+                    await message.edit(embed=embed)
                     if before.channel in activeLessonsCat.channels:
-                        l
-                        await lesson.teacher.create_dm
-                        await lesson.teacher.dm_channel.send(f"{member.nick} just left the call!")
-                        await lesson.tc.send(f"{member.nick} just left the call!")
+                        
+                        await lesson.teacher.create_dm()
+                        await lesson.teacher.dm_channel.send(f"{member.name} just left the call!")
+                        await channel.send(f"{member.name} just left the call!")
                     
                     return
 
