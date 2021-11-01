@@ -1,0 +1,32 @@
+2021-10-25 15:13:04,255:DEBUG:bot: ========================RESTART===========================
+2021-10-25 15:13:04,432:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-25 15:13:04,456:DEBUG:bot: Cogs Loaded
+2021-10-25 15:13:07,246:DEBUG:bot: Help cog is ready!
+2021-10-25 15:13:07,246:DEBUG:bot: Lessons cog is ready!
+2021-10-25 15:13:07,246:DEBUG:bot: Commands cog is ready!
+2021-10-25 15:13:07,246:DEBUG:bot: Setup cog is ready!
+2021-10-25 15:13:07,246:DEBUG:bot: Dev cog is ready!
+2021-10-25 15:15:01,964:DEBUG:bot: ========================RESTART===========================
+2021-10-25 15:15:02,009:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-25 15:15:02,027:DEBUG:bot: Cogs Loaded
+2021-10-25 15:15:04,792:DEBUG:bot: Help cog is ready!
+2021-10-25 15:15:04,792:DEBUG:bot: Lessons cog is ready!
+2021-10-25 15:15:04,792:DEBUG:bot: Commands cog is ready!
+2021-10-25 15:15:04,792:DEBUG:bot: Setup cog is ready!
+2021-10-25 15:15:04,792:DEBUG:bot: Dev cog is ready!
+2021-10-25 15:28:04,272:DEBUG:bot: ========================RESTART===========================
+2021-10-25 15:28:04,321:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-25 15:28:04,361:DEBUG:bot: Cogs Loaded
+2021-10-25 15:28:07,077:DEBUG:bot: Help cog is ready!
+2021-10-25 15:28:07,078:DEBUG:bot: Lessons cog is ready!
+2021-10-25 15:28:07,078:DEBUG:bot: Commands cog is ready!
+2021-10-25 15:28:07,078:DEBUG:bot: Setup cog is ready!
+2021-10-25 15:28:07,078:DEBUG:bot: Dev cog is ready!
+2021-10-25 15:31:59,404:DEBUG:bot: ========================RESTART===========================
+2021-10-25 15:31:59,450:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-25 15:31:59,469:DEBUG:bot: Cogs Loaded
+2021-10-25 15:32:02,212:DEBUG:bot: Help cog is ready!
+2021-10-25 15:32:02,212:DEBUG:bot: Lessons cog is ready!
+2021-10-25 15:32:02,213:DEBUG:bot: Commands cog is ready!
+2021-10-25 15:32:02,213:DEBUG:bot: Setup cog is ready!
+2021-10-25 15:32:02,213:DEBUG:bot: Dev cog is ready!

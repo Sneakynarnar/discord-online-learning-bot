@@ -4,6 +4,7 @@ import logging
 import logging.handlers
 from discord_slash import SlashCommand
 
+
 logger = logging.getLogger("bot")
 
 
@@ -15,6 +16,9 @@ class Homework(commands.Cog):
         async def on_ready(self):
             logger.debug("Homework cog is ready!")
         
+
+
+
 
 
 

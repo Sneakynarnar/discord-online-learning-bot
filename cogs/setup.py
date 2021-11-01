@@ -49,7 +49,7 @@ managerRole = create_option(
 ) 
 helpChannelNames = ["Ash", "Birch", "Cedar", "Dragon", "Elm", "Fir","Garjan", "Hazel", "Ivorypalm", "Juniper", "Kapok", "Locust", "Mombin","Nutmeg", "Oak", "Palm","Sapel", \
                     "Teak", "Upas", "Wingnut", "Yew", "Zelkova" ]           
-guild_ids = [836901717160886292, 883409165391896626, 884796354390523974] # contains the guildId of the test OCR setver
+guild_ids = [836901717160886292, 883409165391896626, 884796354390523974,899703139840708668,] # contains the guildId of the test OCR setver
 class Setup(commands.Cog):
         def __init__(self, bot):
             self.bot = bot 
@@ -60,18 +60,18 @@ class Setup(commands.Cog):
         
         
         @cog_ext.cog_slash(name="deletehelpdata", description="If Help is has broken it can be reset here", guild_ids=guild_ids)
-        async def resetHelp(self, ctx: discord_slash.SlashContext):
-            cur.execute("SELECT channel_Id FROM help_channels WHERE guild_id = ?", (ctx.guild.id,))
-            records = cur.fetchall()
-            guild = ctx.guild
-            for x in records:
+        async def resetHelp(self, ctx: discord_slash.SlashContext): ## resets help data
+            cur.execute("SELECT channel_Id FROM help_channels WHERE guild_id = ?", (ctx.guild.id,)) # This will get all help channels registered to the server
+            records = cur.fetchall() # this returns the record in a tuple and a list of records will be stored in a tuple ((438790327509753290,), (352897275329835729,), (52373288957382853,))
+            guild = ctx.guild # just saves a little typing I can just type guild and not ctx.guild
+            for x in records: # iterating through the records
                 
-                channel = guild.get_channel(x[0])
-                if channel is not None:
-                    await channel.delete()
+                channel = guild.get_channel(x[0]) # Gets the channel object from the channelId  
+                if channel is not None: #  If the channel exists
+                    await channel.delete() # deletes the chanel
                 else:
                     continue
-            cur.execute("SELECT category_id FROM subjects WHERE guildID = ?", (ctx.guild.id,))
+            cur.execute("SELECT category_id FROM subjects WHERE guildID = ?", (ctx.guild.id,)) # #
             records = cur.fetchall()
 
             for x in records:
@@ -90,7 +90,10 @@ class Setup(commands.Cog):
             cur.execute("DELETE FROM help_channels WHERE guild_id = ?", (ctx.guild.id,))
             cur.execute("DELETE FROM subjects WHERE guildID = ?", (ctx.guild.id,))
             con.commit()
-            await ctx.send("All help data has been deleted do /setuphelp to set help up again")
+            try:
+                await ctx.send("All help data has been deleted do /setuphelp to set help up again")
+            except:
+                pass
         @cog_ext.cog_slash(name="setup", ### 
                             description ="Set up the server to be how the bot needs it",
                             options = [schoolName, schoolAbr, studentRole, teacherRole, managerRole], guild_ids=guild_ids)
@@ -110,14 +113,15 @@ class Setup(commands.Cog):
                     tRole= await guild.create_role(name= teacherRoleName, hoist = True, mentionable=True) # teacher Role                
 
                     
-                    roleNames = [("Rookie", 0xffa200), ("Amateur", 0xffdd00), ("Experienced", 0x006eff), ("Expert", 0x00c3ff),  ("Master", 0x00ff1a), ("Epic", 0xc300ff), ("Legendary", 0x0dff00), ("Ultimate", 0xea00ff),("GOD", 0xffffff)]
-                    for x in range(8, -2, -1):
-                        
-                        if x != -1:
-                            name = roleNames[x][0] + " Helper"
-                            role = await guild.create_role(name=name, hoist =True, mentionable=False, colour=roleNames[x][1])
-                        cur.execute("INSERT INTO helpRoles VALUES (?, ?, ?)", (role.id, ctx.guild.id, (x+2)*10))
-                
+                    roleNames = [("Rookie", 0xffa200), ("Amateur", 0xffdd00), ("Experienced", 0x006eff), ("Expert", 0x00c3ff),  ("Master", 0x00ff1a), ("Epic", 0xc300ff), ("Legendary", 0x0dff00), ("Ultimate", 0xea00ff), ("Mythic", 0xffd445),("GOD", 0xffffff)]
+                    counter = 10
+                    for record in roleNames:
+                        name = record[0] + " Helper"
+                        role = await guild.create_role(name=name, hoist =True, mentionable=False, colour=record[1])
+                        print(name)
+                        cur.execute("INSERT INTO helpRoles VALUES (?, ?, ?)", (role.id, ctx.guild.id, counter))
+                        counter+= 10
+
 
                 
 
@@ -149,33 +153,36 @@ class Setup(commands.Cog):
                     activeLessons = await guild.create_category(name="Your Active lessons voice channels")
                     overwrites = {guild.default_role: discord.PermissionOverwrite(speak=False, stream=False,)}
                     waitingRoom = await activeLessons.create_voice_channel(name="Waiting Room", overwrites=overwrites)
-                    overwrites = {sRole: discord.PermissionOverwrite(read_messages = False)} # Students dont have the permission to read teacher channels
+                    overwrites = {sRole: discord.PermissionOverwrite(read_messages = False),
+                                  guild.default_role: discord.PermissionOverwrite(read_messages=False)} # Students dont have the permission to read teacher channels
                     teachers = await guild.create_category(name="Teacher chat", overwrites=overwrites)
                     await asyncio.sleep(2)
                     await teachers.create_text_channel(name="teachers-chat")
                     await teachers.create_voice_channel(name="Teachers VC")
                     overwrites = {
                                 tRole: discord.PermissionOverwrite(read_messages = False),
-                                sRole: discord.PermissionOverwrite(read_messages = False)
+                                sRole: discord.PermissionOverwrite(read_messages = False),
+                                guild.default_role: discord.PermissionOverwrite(read_messages=False)
                                 } # Teachers dont have permission to read manager channels and neither do students
 
                     managers = await guild.create_category(name="Manager chats", overwrites=overwrites)
-                    await managers.create_text_channel(name="managers-chat")
+                    managersChat = await managers.create_text_channel(name="managers-chat")
                     await managers.create_voice_channel(name="Managers VC")
                     
-
+                    overwrites = {guild.default_role: discord.PermissionOverwrite(read_messages=False),
+                                  sRole: discord.PermissionOverwrite(read_messages=False)}
                     
                     try:
-                        await generalChannels.create_text_channel(name=f"{school_abreviation}-general") # creating channels in the "General channels category"
-                        await generalChannels.create_text_channel(name=f"{school_abreviation}-offtopic")
-                        await generalChannels.create_text_channel(name=f"{school_abreviation}-resources") 
+                        await generalChannels.create_text_channel(name=f"{school_abreviation}-general", overwrites=overwrites) # creating channels in the "General channels category"
+                        await generalChannels.create_text_channel(name=f"{school_abreviation}-offtopic", overwrites=overwrites)
+                        await generalChannels.create_text_channel(name=f"{school_abreviation}-resources", overwrites=overwrites) 
                     except Exception as e:
                         print(f"Error when creating channels\n{e}")
 
 
                     
                     # (guildID integer,schoolName text,schoolAbrieviation text,studentRoleId integer,teacherRoleId integer,managerRoleId integer)
-                    cur.execute("INSERT INTO schoolGuilds VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (int(ctx.guild.id), school_name, school_abreviation,int(sRole.id),  int(tRole.id), int(mRole.id), 0,  0, 0, 0, activeLessons.id, privateVC.id, waitingRoom.id))
+                    cur.execute("INSERT INTO schoolGuilds VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (int(ctx.guild.id), school_name, school_abreviation,int(sRole.id),  int(tRole.id), int(mRole.id), 0,  0, 0, 0, activeLessons.id, privateVC.id, waitingRoom.id, managersChat.id))
                     embed = discord.Embed(title= "Server Set up!",)
                     embed.add_field(name="What to do now?", value="Now that all the neccesary channels have been created as long as you don't delete any or add any channels to the help categories or the active lessons catagory, feel free to customize the server how you want! If you want custom names for \
                         categories and channels feel free to do so! Add descriptions to channels to tell your students what to use the channel for, add a server picture! We recommend you delete the default channels that discord may have created because they are redundant. Change the colours of the roles or even add new roles!"
@@ -207,18 +214,18 @@ class Setup(commands.Cog):
                     if cur.fetchone() is None:
                             cur.execute("SELECT studentRoleId, teacherRoleId FROM schoolGuilds WHERE guildID=:guildId", {"guildId": ctx.guild.id})
                             record = cur.fetchone()
-                            cdRole = await guild.create_role(name="Help cooldown", mentionable=False)
+                            cdRole = await guild.create_role(name="Help cooldown", mentionable=False) # Help cooldown role (people who have this role will not be able to claim a help channel)
 
                             avaliable = await guild.create_category(name="✅ | Avaliable help channels!" )
                             student = guild.get_role(int(record[0]))
                             teacher = guild.get_role(int(record[1]))
-                            # Help cooldown role (people who have this role will not be able to claim a help channel)
-                            overwrites = {
+                            
+                            overwrites = { # Only people on cooldown should be able to see the channel,
                                 student: discord.PermissionOverwrite(read_messages=False),
                                 cdRole: discord.PermissionOverwrite(send_messages=False, read_messages=True),
                                 
                             }
-                            cdChannel = await avaliable.create_text_channel(name="🔴COOLDOWN🔴", overwrites=overwrites)
+                            cdChannel = await avaliable.create_text_channel(name="🔴COOLDOWN🔴", overwrites=overwrites) #creates the cooldown channel
                             embed = discord.Embed(title="You are currently on cooldown!!", description="You are currently on cooldown! This means you can't claim another help channel. \
                                  If after 30 minutes no one has come to help you, feel free to open another help channel!", colour=0xFF0000)
                             await cdChannel.send(embed=embed)
@@ -248,8 +255,8 @@ class Setup(commands.Cog):
                                     
                       
                             overwrites = {
-                            guild.default_role: discord.PermissionOverwrite(send_messages = False),
-                            student: discord.PermissionOverwrite(send_messages=False, ),
+                            guild.default_role: discord.PermissionOverwrite(send_messages = False), ## No one should be able to talk in dormant help channels
+                            student: discord.PermissionOverwrite(send_messages=False, ), #
                             teacher: discord.PermissionOverwrite(send_messages=False, read_messages=True)
                             }
                             dormant = await guild.create_category(name="💤 | Dormant help channels",overwrites=overwrites) # This will create the channel and set the  object to dormant
@@ -276,12 +283,12 @@ class Setup(commands.Cog):
                             student: discord.PermissionOverwrite(send_messages=True),
                             cdRole: discord.PermissionOverwrite(read_messages=False, send_messages=False)
                             }                                    
-                            for x in range(3):
+                            for x in range(3): # This will move 3 channels from dormant to avaliable category and send the avaliable embed. 
                                 channel=dormant.channels[x]
                                 await channel.edit(category=avaliable, overwrites=overwrites)
                                 await channel.send(embed=avaliableEmbed)
-                                await asyncio.sleep(0.2)
-                            for channel in dormant.channels:
+                                await asyncio.sleep(0.2) # A little bit of delay so discord doesnt rate limit us.
+                            for channel in dormant.channels: #The rest of the channel we will send the dormant embed
                                 await channel.send(embed=dormantEmbed)
                                 await asyncio.sleep(0.2)
                             await ctx.send("Help has been set up! Make sure you don't delete any of the help channels or subjects")

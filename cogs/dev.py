@@ -10,7 +10,7 @@ from discord_slash.utils.manage_commands import create_option
 con = sqlite3.connect("resources/databases/schooldata.db")
 cur = con.cursor()
 logger = logging.getLogger("bot")
-guild_ids = [836901717160886292,884796354390523974]
+guild_ids = [836901717160886292,884796354390523974,899703139840708668]
 owner = 339866237922181121
 class Dev(commands.Cog):
         def __init__(self, bot):
@@ -33,7 +33,6 @@ class Dev(commands.Cog):
                         
 
                         if channel.name != ctx.channel.name:
-                            
                             await channel.delete()
                             await asyncio.sleep(0.2)
 

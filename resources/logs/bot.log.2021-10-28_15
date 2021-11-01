@@ -1,0 +1,63 @@
+2021-10-28 14:20:00,430:DEBUG:bot: ========================RESTART===========================
+2021-10-28 14:20:00,608:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-28 14:20:00,617:DEBUG:bot: Cogs Loaded
+2021-10-28 14:20:03,339:DEBUG:bot: Help cog is ready!
+2021-10-28 14:20:03,339:DEBUG:bot: Lessons cog is ready!
+2021-10-28 14:20:03,339:DEBUG:bot: Commands cog is ready!
+2021-10-28 14:20:03,339:DEBUG:bot: Setup cog is ready!
+2021-10-28 14:20:03,340:DEBUG:bot: Dev cog is ready!
+2021-10-28 14:20:32,636:DEBUG:bot: ========================RESTART===========================
+2021-10-28 14:20:32,678:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-28 14:20:32,702:DEBUG:bot: Cogs Loaded
+2021-10-28 14:20:35,327:DEBUG:bot: Help cog is ready!
+2021-10-28 14:20:35,327:DEBUG:bot: Lessons cog is ready!
+2021-10-28 14:20:35,327:DEBUG:bot: Commands cog is ready!
+2021-10-28 14:20:35,327:DEBUG:bot: Setup cog is ready!
+2021-10-28 14:20:35,327:DEBUG:bot: Dev cog is ready!
+2021-10-28 14:39:11,852:DEBUG:bot: Help cog is ready!
+2021-10-28 14:39:11,853:DEBUG:bot: Lessons cog is ready!
+2021-10-28 15:37:27,258:DEBUG:bot: Commands cog is ready!
+2021-10-28 15:37:27,258:DEBUG:bot: Setup cog is ready!
+2021-10-28 15:37:27,258:DEBUG:bot: Dev cog is ready!
+2021-10-28 15:37:35,167:DEBUG:bot: Help cog is ready!
+2021-10-28 15:37:35,168:DEBUG:bot: Lessons cog is ready!
+2021-10-28 15:37:47,456:DEBUG:bot: ========================RESTART===========================
+2021-10-28 15:37:47,498:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-28 15:37:47,509:DEBUG:bot: Cogs Loaded
+2021-10-28 15:37:50,092:DEBUG:bot: Help cog is ready!
+2021-10-28 15:37:50,092:DEBUG:bot: Lessons cog is ready!
+2021-10-28 15:37:50,092:DEBUG:bot: Commands cog is ready!
+2021-10-28 15:37:50,092:DEBUG:bot: Setup cog is ready!
+2021-10-28 15:37:50,093:DEBUG:bot: Dev cog is ready!
+2021-10-28 15:46:22,905:DEBUG:bot: ========================RESTART===========================
+2021-10-28 15:46:22,955:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-28 15:46:22,973:DEBUG:bot: Cogs Loaded
+2021-10-28 15:46:25,925:DEBUG:bot: Help cog is ready!
+2021-10-28 15:46:25,926:DEBUG:bot: Lessons cog is ready!
+2021-10-28 15:46:25,926:DEBUG:bot: Commands cog is ready!
+2021-10-28 15:46:25,926:DEBUG:bot: Setup cog is ready!
+2021-10-28 15:46:25,926:DEBUG:bot: Dev cog is ready!
+2021-10-28 16:10:16,030:DEBUG:bot: ========================RESTART===========================
+2021-10-28 16:10:16,119:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-28 16:10:16,136:DEBUG:bot: Cogs Loaded
+2021-10-28 16:10:18,900:DEBUG:bot: Help cog is ready!
+2021-10-28 16:10:18,900:DEBUG:bot: Lessons cog is ready!
+2021-10-28 16:10:18,900:DEBUG:bot: Commands cog is ready!
+2021-10-28 16:10:18,900:DEBUG:bot: Setup cog is ready!
+2021-10-28 16:10:18,900:DEBUG:bot: Dev cog is ready!
+2021-10-28 16:10:52,133:DEBUG:bot: ========================RESTART===========================
+2021-10-28 16:10:52,176:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-28 16:10:52,195:DEBUG:bot: Cogs Loaded
+2021-10-28 16:10:54,833:DEBUG:bot: Help cog is ready!
+2021-10-28 16:10:54,833:DEBUG:bot: Lessons cog is ready!
+2021-10-28 16:10:54,833:DEBUG:bot: Commands cog is ready!
+2021-10-28 16:10:54,833:DEBUG:bot: Setup cog is ready!
+2021-10-28 16:10:54,833:DEBUG:bot: Dev cog is ready!
+2021-10-28 16:16:00,587:DEBUG:bot: ========================RESTART===========================
+2021-10-28 16:16:00,630:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-28 16:16:00,650:DEBUG:bot: Cogs Loaded
+2021-10-28 16:16:05,071:DEBUG:bot: Help cog is ready!
+2021-10-28 16:16:05,072:DEBUG:bot: Lessons cog is ready!
+2021-10-28 16:16:05,072:DEBUG:bot: Commands cog is ready!
+2021-10-28 16:16:05,072:DEBUG:bot: Setup cog is ready!
+2021-10-28 16:16:05,072:DEBUG:bot: Dev cog is ready!

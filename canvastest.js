@@ -4,7 +4,6 @@ const height = 200;
 const canvas = createCanvas(width, height);
 const ctx = canvas.getContext("2d");
 const lvlThreshHold = 250
-function 
 var username = "EliteNarNar#0001"
 var position = 1
 var totalXp = 100
@@ -18,3 +17,5 @@ ctx.fillText(username, 100, 100);
 const buffer = canvas.toBuffer("image/png");
 const fs = require("fs");
 fs.writeFileSync("resources/temporaryfiles/rank.png", buffer);
+
+

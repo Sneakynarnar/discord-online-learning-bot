@@ -1,0 +1,24 @@
+2021-10-27 18:35:35,487:DEBUG:bot: ========================RESTART===========================
+2021-10-27 18:35:35,647:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-27 18:35:35,660:DEBUG:bot: Cogs Loaded
+2021-10-27 18:35:38,446:DEBUG:bot: Help cog is ready!
+2021-10-27 18:35:38,447:DEBUG:bot: Lessons cog is ready!
+2021-10-27 18:35:38,447:DEBUG:bot: Commands cog is ready!
+2021-10-27 18:35:38,447:DEBUG:bot: Setup cog is ready!
+2021-10-27 18:35:38,447:DEBUG:bot: Dev cog is ready!
+2021-10-27 19:27:25,966:DEBUG:bot: ========================RESTART===========================
+2021-10-27 19:27:26,010:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-27 19:27:26,026:DEBUG:bot: Error loading lessons Exception: Extension 'cogs.lessons' raised an error: SyntaxError: closing parenthesis ')' does not match opening parenthesis '[' (lessons.py, line 216)
+2021-10-27 19:27:26,032:DEBUG:bot: Cogs Loaded
+2021-10-27 19:27:28,876:DEBUG:bot: Help cog is ready!
+2021-10-27 19:27:28,876:DEBUG:bot: Commands cog is ready!
+2021-10-27 19:27:28,876:DEBUG:bot: Setup cog is ready!
+2021-10-27 19:27:28,876:DEBUG:bot: Dev cog is ready!
+2021-10-27 19:28:25,553:DEBUG:bot: ========================RESTART===========================
+2021-10-27 19:28:25,595:DEBUG:bot: Error loading homework Exception: Extension 'cogs.homework' raised an error: SyntaxError: invalid syntax (homework.py, line 6)
+2021-10-27 19:28:25,611:DEBUG:bot: Cogs Loaded
+2021-10-27 19:28:28,198:DEBUG:bot: Help cog is ready!
+2021-10-27 19:28:28,198:DEBUG:bot: Lessons cog is ready!
+2021-10-27 19:28:28,198:DEBUG:bot: Commands cog is ready!
+2021-10-27 19:28:28,198:DEBUG:bot: Setup cog is ready!
+2021-10-27 19:28:28,198:DEBUG:bot: Dev cog is ready!
