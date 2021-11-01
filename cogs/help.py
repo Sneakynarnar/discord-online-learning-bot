@@ -11,7 +11,6 @@ from discord_slash import SlashCommand, cog_ext
 import regex as re
 import io
 import json
-import math
 from datetime import timedelta
 from discord_slash.utils.manage_commands import create_option
 from datetime import datetime
@@ -20,7 +19,7 @@ logger = logging.getLogger("bot")
 con = sqlite3.connect("resources/databases/schooldata.db")
 cur = con.cursor()
 BASE_REWARD = 250
-guild_ids = [836901717160886292, 883409165391896626,884796354390523974,899703139840708668]
+guild_ids = [836901717160886292, 883409165391896626,884796354390523974]
 class Help(commands.Cog):
         def __init__(self, bot):
             self.bot = bot
@@ -77,33 +76,37 @@ class Help(commands.Cog):
                                                                                 create_option(name="rating",description="How much did this person help you? 1-10",required=False,option_type=4)])
         async def close(self, ctx: discord_slash.SlashContext, helper, rating=None):
             global BASE_REWARD
-            rating = 5 if rating is None else rating # rating defaults to 5 if user doesnt specify a rating
+            rating = 5 if rating is None else rating
             if rating <1 or rating >10:
-                await ctx.send("That's not a rating between 1 and 10!")  # Ratings have to be between 1-19
+                await ctx.send("Thats not a rating between 1 and 10!")
                 return
             
             cur.execute(f"SELECT * FROM helpLevels WHERE memberId = {helper.id} AND guildId = {ctx.guild.id}")
             if cur.fetchone() is None:
-                cur.execute("INSERT INTO helpLevels VALUES (?,?,?,?,?)", (helper.id, ctx.guild.id, 0,0,1)) # if user has never gained exp before a new record is created for them
-                record = (helper.id, ctx.guild.id, 0,0,0) 
+                cur.execute("INSERT INTO helpLevels VALUES (?,?,?,?,?)", (helper.id, ctx.guild.id, 0,0,1))
+                record = (helper.id, ctx.guild.id, 0,0,0)
             else:
-                record = cur.fetchone() 
+                record = cur.fetchone()
+
+
             cur.execute("SELECT guild_id FROM help_channels WHERE channel_id = ?", (ctx.channel.id,))
             if cur.fetchone() is not None:
-                helpers = self.questions[str(ctx.channel.id)]["helpers"] # Checks if this person even sent a message in the help_channel
+                helpers = self.questions[str(ctx.channel.id)]["helpers"]
                 if str(helper.id) not in helpers.keys():
-                    await ctx.send("This person did not help you!") 
-                    return       
-                message = await ctx.channel.pins() 
-                message = message[0] # There is should only be 1 pinned message, the question the user asked
+                    await ctx.send("This person did not help you!")
+                    return
+                
+                message = await ctx.channel.pins()
+                message = message[0]
                 if message.author == ctx.author:
-                    await message.unpin() 
+
+                    await message.unpin()
                     await ctx.send("Closing help channel.")
                     rating /= 10
                     rating+=0.3
                     multiplier =1+rating if rating >0.5 else 1-rating
-                    amount = BASE_REWARD*multiplier if rating != 0.5 else BASE_REWARD # Users should earn a minimum of BASE_REWARD. Exp given increases based on the rating
-                    await self.addExp(helper, amount, ctx.guild) # Adds Exp
+                    amount = BASE_REWARD*multiplier if rating != 0.5 else BASE_REWARD
+                    await self.addExp(helper, amount, ctx.guild)
                     await self.markAsDormant(ctx.channel)
                 else:
                     await ctx.send("You can't close someone elses help channel!")
@@ -121,6 +124,7 @@ class Help(commands.Cog):
                 record = (member.id, ctx.guild.id, 0,0,1)
 
                 
+            print(record)
             buffer = await self.getRankImage(member, record[2], record[4], record[3], ctx.guild)
             await ctx.send(file=File(buffer, "rank.png"))
 
@@ -128,97 +132,121 @@ class Help(commands.Cog):
         async def on_ready(self):
             logger.debug("Help cog is ready!")
 
-        @commands.Cog.listener()  
-        async def on_message(self, msg):
-            now = datetime.utcnow()
-            cur.execute("SELECT guild_id FROM help_channels WHERE channel_id = ?", (msg.channel.id,))
+        @commands.Cog.listener() # bot event
+        async def on_message(self, msg): # Everytime a message is sent in a channel the bot can see
+           
+            now = datetime.utcnow() # Timezones don't matter since we are just using the time to see how long a help channel is open.
+            cur.execute("SELECT guild_id FROM help_channels WHERE channel_id = ?", (msg.channel.id,)) 
             guildId= cur.fetchone()
-            if guildId is None:
+            
+            if guildId is None: # If guildId is none that means this si not a help channel, so we return
+                
                 return
             else:
-                guildId = guildId[0]
-                guild = self.bot.get_guild(guildId)
-                channel = msg.channel
+                guildId = guildId[0] 
+                guild = self.bot.get_guild(guildId) #Gets the guild object from the Id
+                channel = msg.channel # saves a little typing
                 cur.execute("SELECT dormantCategoryId, avaliableCategoryId, coolDownRoleId FROM schoolGuilds WHERE guildID = ?", (guild.id,))
                 record = cur.fetchone()
-                avaliable = guild.get_channel(record[1]) ## getting channel objects
+          
+                avaliable = guild.get_channel(record[1])  # Getting all the help categories
                 dormant = guild.get_channel(record[0])
-                cdRole = guild.get_role(record[2]) # cooldown roles
-                cur.execute("SELECT category_id FROM subjects WHERE guildID = ? ", (guild.id,))
-                channels = cur.fetchall()
-                occupiedChannels = [x[0] for x in channels] # occupied subject category
-                if msg.channel.category == avaliable: ## If its in the avaliable category, then its an avaliable help channel
+                cdRole = guild.get_role(record[2])
+                cur.execute("SELECT category_id FROM subjects WHERE guildID = ?", (guild.id,)) #Gets all the subject categories
+                
+                channels = cur.fetchall() 
+                occupiedChannels = [x[0] for x in channels] # List of occupied channels
+
+                if msg.channel.category == avaliable: # This means a message was sent in an avaliable help channel
                     logger.debug("Recognised avaliable channel")
                     msgList = msg.content.split()
                     try:
-                        prefix = msgList[0]  # first word in the list
+                        prefix = msgList[0] # The first word should be the subject (COMPUTER SCIENCE)
                     except:
                         return
                     subMatch = re.match("\((\D+)\)", prefix)  # Checking if the first word of the sentence is (WORD) so the person has the right syntax
-                    if subMatch:
+                    if subMatch: #If it matches
+                        
                         sub = subMatch.group(1)
-                        cur.execute("SELECT subject, category_id FROM subjects WHERE guildID= ?", (msg.guild.id,))
-                        subjects = cur.fetchall() ## get subject and categoryId
-                        subject = None # initialise subject as None
+
+                        cur.execute("SELECT subject, category_id FROM subjects WHERE guildID= ?", (msg.guild.id,)) # Fetches the category
+                        
+                        subjects = cur.fetchall()
+                       
+                        subject = None
                         for x in range(len(subjects)):
                             if subjects[x][0].lower() == sub.lower():
                                 subject = subjects[x]
+
                             else:
                                 continue
+                            
                         if subject is not None:
                             await msg.pin() ##pinning a message is like "bookmarking" a message a list of pinned messages can be seen in the channel
                           
-                            subcat = guild.get_channel(subject[1])
-                            overwrites = {cdRole: discord.PermissionOverwrite(read_messages=True, send_messages=True)}
-                            await msg.channel.edit(category=subcat, overwrites=overwrites) #Moves the channel to the subject occupied channel
-                            await msg.author.create_dm() 
+                            subcat = guild.get_channel(subject[1]) # Gets the subject category
+                            overwrites = {cdRole: discord.PermissionOverwrite(read_messages=True, send_messages=True)}# People on cool down will be able to see the occupied help channel in case they want to help
+
+                            await msg.channel.edit(category=subcat, overwrites=overwrites)  #Moves the channel to its subject category
+                            await msg.author.create_dm()
                             embed = discord.Embed(title="Help channel claimed!", description = f"You claimed the help channel {msg.channel.mention} for the subject {sub.lower()}")
                             embed.add_field(name="Your question", value=msg.content, inline=False)
-                            link = "https://www.discord.com/channels/" + str(guild.id) +"/"+ str(channel.id) +"/" + str(msg.id)
+                            
+                            link = "https://www.discord.com/channels/" + str(guild.id) +"/"+ str(channel.id) +"/" + str(msg.id) # Link to the message
                             embed.add_field(name="Link to message", value =f"[Click here to jump to your question]({link})")
-                            await msg.author.dm_channel.send(embed=embed) # Sends the embed 
+
+
+                            await msg.author.dm_channel.send(embed=embed) #Sends a direct message to the person claiming the channel with all the info
                             self.questions[str(msg.channel.id)] = {}
                             self.questions[str(msg.channel.id)]["owner"] = msg.author.id
                             self.questions[str(msg.channel.id)]["lastMessage"] = [now.year, now.month, now.day, now.hour, now.minute]
                             self.questions[str(msg.channel.id)]["messageId"] = msg.id
                             self.questions[str(msg.channel.id)]["helpers"] = {}
-                            with open("resources/databases/questions.json", "w") as F: # Saves in a file just in case the bot goes down while their are open help_channels
+                            with open("resources/databases/questions.json", "w") as F: # In case the bot goes down while this is running we store it in a file
+                                
                                 json.dump(self.questions, F)
-                            newAvaliableChannel = dormant.channels[0] #Selects the next dormant channel that replaces this avaliable channel once its claimed
-                            cur.execute("SELECT studentRoleId FROM schoolGuilds WHERE guildID = ?", (msg.guild.id,)) # Gets the student roleId
+                            newAvaliableChannel = dormant.channels[0] #Selects the next dormant channel that is ready to be moved to avaliable
+                            cur.execute("SELECT studentRoleId FROM schoolGuilds WHERE guildID = ?", (msg.guild.id,))
                             role =cur.fetchone()
-                            sRole = msg.guild.get_role(role[0]) # fetches student role object
-                            overwrites = { # Making it so people on cooldown cant see avaliable channels.
+                            sRole = msg.guild.get_role(role[0])
+                           
+                            overwrites = {
                             guild.default_role: discord.PermissionOverwrite(send_messages = False),
                             sRole: discord.PermissionOverwrite(send_messages=True),
-                            cdRole: discord.PermissionOverwrite(read_messages=False) 
-                            }        
+                            cdRole: discord.PermissionOverwrite(read_messages=False)
+                            }        # Students should be allowed to send messages and avaliable channels should be hidden to people with the cooldown role
+                            
                             avaliableEmbed = discord.Embed(title="This help channel is avaliable!", description="To claim this help channel type (SUBJECT) then your question after. \
                                                             For example: \n\n*(COMPUTER SCIENCE) Are dictionaries in python ordered or unordered?*\n\n Alternatively, if your question isnt tied to a subject just add (GENERAL)  \
                                                                 before your question for example:\n\n*(GENERAL) Where is the assembly today taking place?*\n\n hopefully someone can help!", colour=0x3ee800)
-                            await newAvaliableChannel.edit(overwrites=overwrites) # New perms
-                            await newAvaliableChannel.edit(category=avaliable) # changing the subjects to avaliable
+                            await newAvaliableChannel.edit(overwrites=overwrites)
+    
+                            await newAvaliableChannel.edit(category=avaliable)
                             await newAvaliableChannel.send(embed=avaliableEmbed)
-                            await self.cooldown(msg.author, cdRole) # Puts the person who just claimed the channel (who is the author of the message) on cooldown
+                            await self.cooldown(msg.author, cdRole)
                         else:
                             await msg.author.create_dm()
                             await msg.author.dm_channel.send("That is not a subject the school has registered! If you believe this is in error tell managers to add this subject. To see a list of subjects in your school do /subjects")
                             await msg.delete()
+                           
                     else:
                         await msg.delete()
                         await msg.author.create_dm()
                         await msg.author.dm_channel.send("Make sure you put the subject name before your question! For example:\n\n (MATHS) How can I use the binomial infinite series to estimate pi? \n\n")
-                elif msg.channel.category.id in occupiedChannels: # Sent a message in a channel thats already occupied
-                    self.questions[str(msg.channel.id)]["lastMessage"] = [now.year, now.month, now.day, now.hour, now.minute] # Makes a record of the time the last message sent
-                    if self.questions[str(msg.channel.id)]["owner"] == msg.author.id:
-                        return
+                elif msg.channel.category.id in occupiedChannels:
+                    print("hi")
+                    self.questions[str(msg.channel.id)]["lastMessage"] = [now.year, now.month, now.day, now.hour, now.minute]
                     
-                    if str(msg.author.id) not in self.questions[str(msg.channel.id)]["helpers"].keys(): # Adds the helper to the helpers list if they arent there already 
+                    if str(msg.author.id) not in self.questions[str(msg.channel.id)]["helpers"].keys():
                         self.questions[str(msg.channel.id)]["helpers"][str(msg.author.id)] = 1
                     else:
                         self.questions[str(msg.channel.id)]["helpers"][str(msg.author.id)] +=1
-                    with open("resources/databases/questions.json", "w") as F: # saving to file
-                        json.dump(self.questions, F)  
+                    
+                    with open("resources/databases/questions.json", "w") as F:
+                        json.dump(self.questions, F)
+
+
+                            
                 else:
                     pass
                     
@@ -232,32 +260,39 @@ class Help(commands.Cog):
         async def channelExpiration(self):
             deleteList = [] 
             global BASE_REWARD
-            for k, v in self.questions.items(): # iterating though all occupied help channels
-                lastMessageDate = datetime(v["lastMessage"][0],v["lastMessage"][1],v["lastMessage"][2],v["lastMessage"][3],v["lastMessage"][4]) # getting the date of the last message
-                expire = datetime.utcnow() + timedelta(minutes=30) # 30 minutes before the date now
+            for k, v in self.questions.items():
+                lastMessageDate = datetime(v["lastMessage"][0],v["lastMessage"][1],v["lastMessage"][2],v["lastMessage"][3],v["lastMessage"][4])
+                
+                expire = datetime.utcnow() + timedelta(minutes=2)
                 conditions = [lastMessageDate.year == expire.year, lastMessageDate.month == expire.month, lastMessageDate.day == lastMessageDate.day, lastMessageDate.hour == expire.hour, lastMessageDate.minute == expire.minute]
-                if all(conditions): 
-                    deleteList.append(k) # appends the channel to the delete list 
+                if all(conditions):
+
+                    print(lastMessageDate)
+                    print(expire)
+                    deleteList.append(k)
                     helpers = v["helpers"]
                     if len(helpers) == 0:
                         pass
                     else:
                         highest = 0
-                        for d, e in helpers.items(): # caclulating the person who sent the most messages in the channel
-                            if d > highest:
-                                helper = e
-                                highest = d
+                        for k, v in helpers.items():
+                            if v > highest:
+                                helper = k
+                                highest = v
                     helper = guild.get_member(helper)                       
-
-                    amount = BASE_REWARD # Since no rating is given we just give the user the base reward
+                    rating /= 10
+                    rating+=0.3
+                    multiplier =1+rating if rating >0.5 else 1-rating
+                    amount = BASE_REWARD*multiplier if rating != 0.5 else BASE_REWARD
                     await self.addExp(helper, amount, ctx.guild)
                     channel = self.bot.get_channel(int(k))
-                    message = await channel.fetch_message(int(v["messageId"])) # messageId that was stored
+                    message = await channel.fetch_message(int(v["messageId"]))
                     guild = message.guild
-                    await message.unpin() # unpins the message
-                    await self.markAsDormant(channel) #Marks as dormant
-            for k in deleteList: 
-                del self.questions[k] # deletes from database
+                    await message.unpin()
+                    await self.markAsDormant(channel)
+                
+            for k in deleteList:
+                del self.questions[k]
 
         async def cooldown(self, member: discord.Member, cdRole: discord.Role):
             global cooldownTime
@@ -276,11 +311,11 @@ class Help(commands.Cog):
                     guild_id = g
                     break
             if not valid: # If there is no record of the channel in our list then we raise an error
-                raise ValueError("Channel is not in help_channels!!")
+                raise ValueError("Channel is not in help_channels")
         
             dormantEmbed = discord.Embed(title="This help channel is dormant.", description="If you need help look at the avaliable channels category for more do the \
                                 command /howtogethelp!", colour = 0xff2b2b)         
-            cur.execute("SELECT dormantCategoryId, avaliableCategoryId, cooldownRoleId FROM schoolGuilds WHERE guildID = ?", (guild_id,)) # Gets the info from the guild 
+            cur.execute("SELECT dormantCategoryId, avaliableCategoryId, cooldownRoleId FROM schoolGuilds WHERE guildID = ?", (guild_id,))
             guild = self.bot.get_guild(int(guild_id))
             record = cur.fetchone()
             dormant = guild.get_channel(record[0])
@@ -290,11 +325,14 @@ class Help(commands.Cog):
             cur.execute("SELECT studentRoleId FROM schoolGuilds WHERE guildID = ?", (guild_id,))
             role = cur.fetchone()
             sRole = guild.get_role(int(role[0]))
-            overwrites= {sRole: discord.PermissionOverwrite(read_messages=True, send_messages=False)} # Students shouldnt be able to send messages but should be able to read messages
-            await channel.edit(category=dormant, overwrites=overwrites)# Moves channel to the dormant category
-            await channel.send(embed=dormantEmbed) # sends the "This channel is dormant" embed
+            overwrites= {sRole: discord.PermissionOverwrite(read_messages=True, send_messages=False)}
+            await channel.edit(category=dormant, overwrites=overwrites)
+            await channel.send(embed=dormantEmbed)
                         
-
+            overwrite = discord.PermissionOverwrite()
+            overwrite.send_messages = False
+            overwrite.read_messages = True
+            await channel.set_permissions(sRole, overwrite=overwrite)
 
 
 
@@ -303,62 +341,63 @@ class Help(commands.Cog):
             global BASE_REWARD
             
             cur.execute(f"SELECT * FROM helpLevels WHERE memberId = {helper.id} AND guildId = {guild.id}")
-            record = cur.fetchone() # This will be all the data or help levels.
-            if record is None: # If there is no record we will make a new one
+            record = cur.fetchone()
+            if record is None:
                 cur.execute("INSERT INTO helpLevels VALUES (?,?,?,?,?)", (helper.id, guild.id, 0,0,1))
-                record = (helper.id, guild.id, 0,0,1) #  
-            exp = record[2] 
-            exp+=amount # 
-            level = baseLevel = record[4] # level before we do anything
+                record = (helper.id, guild.id, 0,0,1)
+
+                
+                
+            exp = record[2]
+            exp+=amount
+            level = baseLevel = record[4]
             helped = record[3]
-            if natural: # If the /exp command wasn't used
-                helped+=1 
+            if natural:
+                helped+=1
             leveledUp=False
-            while exp >= 1000: #Means they have leveled up
-                level +=1 # 
+            while exp >= 1000:
+                level +=1
                 exp -=1000
                 leveledUp = True
-            levelDifference = level - baseLevel # How many levels this person has gone up
-            if leveledUp: 
+            levelDifference = level - baseLevel 
+            if leveledUp:
 
                 await helper.create_dm()
-                name = helper.name + helper.discriminator # EliteNarNar + #7573
+                name = helper.name + helper.discriminator
+                buffer = await self.getRankImage(helper,  exp, level,helped, guild)
                 embed = discord.Embed(title="You leveled up!", description=f"You are now level **{level}**", colour=0x00FF00)
                 embed.set_thumbnail(url=helper.avatar_url)
-                await helper.dm_channel.send(embed=embed) # Sends image showing that person has leveled up
 
-                if level <=100: # Make sure the level is smaller than 100 because we only have roles for level 1 -100
+                await helper.dm_channel.send(embed=embed)
+                
+                if level//10 == 0 and level <=100:
+                    cur.execute(f"SELECT roleId FROM helpRoles WHERE guildId = {guild.id} ORDER BY level ASC")
+                    roles = cur.fetchall()
                     
-                    if level > 9:
-                        roleLevel = (math.floor(level/10))*10 if level!=100 else 10 # rounding to the nearest 10
-                        baseRoleLevel = (math.floor(baseLevel/10))*10  
-                        if roleLevel == baseRoleLevel: # Title doesnt change
+                    if levelDifference >10:
+                        removeIndex = int((baseLevel//10)-1)
+                        index = int((level//10)-1)
+                        removeRole = guild.get_role(int(roles[removeIndex][0]))
+                        role = guild.get_role(int(roles[index][0]))
+                        await helper.remove_roles(removeRole)
+                        await helper.add_roles(role)
+
+                        
+                    else:
+                        index = (level/10)-1
+                        role = roles[index][0]
+                        if index == 0:
                             pass
                         else:
-                            cur.execute(f"SELECT roleId FROM helpRoles WHERE guildId = {guild.id} ORDER BY level ASC") # We fetch levels in ascending order
-                            roles = cur.fetchall() # selects the roleIds
-                            addIndex = (roleLevel//10)-1 # Position in the list
-                            removeIndex = (baseLevel//10)-1 if baseRoleLevel > 9 else None
-                            addRole = guild.get_role(roles[addIndex][0])
-
-                            await helper.add_roles(addRole)
-                            if removeIndex is not None:
-                                removeRole = guild.get_role(roles[removeIndex][0]) 
-                                await helper.remove_roles(removeRole)
-                            print(addIndex)
-                            print(addRole)
-                            print(removeIndex)
-                            try:
-                                print(removeRole) 
-                            except:
-                                pass                          
+                            removeRole = guild.get_role(roles[index-1][0])
+                            await helper.remove_roles(removeRole)
+                    
+                        role = guild.get_role(role)
+                        await helper.add_roles(role)
 
 
 
-
-
-            cur.execute(f"UPDATE helpLevels SET XP = {exp}, peopleHelped = {helped}, level = {level} WHERE memberId = {helper.id}", ) # Updates with the new data
-            con.commit() # commit changes
+            cur.execute(f"UPDATE helpLevels SET XP = {exp}, peopleHelped = {helped}, level = {level} WHERE memberId = {helper.id}", )
 
 
 
@@ -379,15 +418,14 @@ class Help(commands.Cog):
             cur.execute("SELECT level, roleId FROM helpRoles WHERE guildId = ? ORDER BY level DESC", (guild.id,))
             records = cur.fetchall()
             title = None
-            print(level)
-            if level > 9:
-                roleLevel = str(level)
-                roleLevel = roleLevel[0]
-                roleLevelIndex = 10 - int(roleLevel)-1              
-                role = guild.get_role(records[roleLevelIndex][1])
-                title=role.name
+            for k, v in records:
+                
+                if k < level:
+                    title = guild.get_role(v)
+                    title = title.name
+                    print(title)
             
-
+                    continue
             if title is None:
                 title = ""
             cur.execute(" SELECT level, memberId FROM helpLevels WHERE guildId = ? ORDER BY level DESC", (guild.id,))
@@ -427,7 +465,7 @@ class Help(commands.Cog):
             circle_draw.ellipse((0,0, 128,128), fill=255)
             image.paste(avatar_image, (20,35), circle_image)
             name = member.name + "#"+member.discriminator
-            draw.multiline_text((175,35), name, font=font, fill=(31, 24, 171))
+            draw.multiline_text((175,35), name, font=font, fill=(0, 166, 255))
             draw.multiline_text((175,90), title, font=titlefont, fill=(0, 255, 242))
             draw.multiline_text((465,100), f"{exp}/1000", font=rankfont, fill=(164, 0, 252) )
             draw.multiline_text((662,50), f"RANK: #{position}", font=rankfont, fill=(0, 166, 255) ) 

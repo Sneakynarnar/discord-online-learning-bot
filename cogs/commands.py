@@ -4,12 +4,14 @@ from discord.ext import commands, tasks
 import logging
 import logging.handlers
 import discord_slash
+import discord_slash.utils
 from discord_slash.utils.manage_commands import create_option, create_choice
 from discord_slash.utils.manage_components import create_actionrow, create_button, wait_for_component
-from discord_slash.model import SlashCommandPermissionType, ButtonStyle
+from discord_slash.model import ButtonStyle
 from discord_slash import SlashCommand, cog_ext, context
 import random
 import asyncio
+import regex as re
 logger = logging.getLogger("bot") # Getting the logger
 con = sqlite3.connect("resources/databases/schooldata.db")
 cur = con.cursor()
@@ -27,18 +29,15 @@ class Commands(commands.Cog):
             guild = member.guild
             async def waitForMessage():
                 def check(m):
-                    name = message.content()
-                    validCharacters = "abcdefghijklmnopqrstuvwxyz-\" " 
-                    valid = True
-                    for char in name:
-                        if char not in validCharacters:
-                            valid =False
-                    nameMatch = re.match(name, "(\D+ \D+)") # Matching for two words IE Nana Adjei
+                    name = m.content   
+                    nameMatch = re.match("(\w+ \w+)",name) # Matching for two words IE Nana Adjei
+
                     bannedCheck = True
-                    for word in bannedWords: # check for banned words in the name
+                    for word in self.bannedWords: # check for banned words in the name
                         if word in name:
                             bannedCheck = False
-                    return m.author == member and m.channel == member.dm_channel and valid and nameMatch and bannedCheck # if all checks are passed we take take the message
+                    
+                    return m.author == member and m.channel == member.dm_channel and nameMatch and bannedCheck # if all checks are passed we take take the message
                 try:
                     message = await self.bot.wait_for('message', timeout=120, check=check) # wait for message for 120 seconds and check must return true
                 except asyncio.TimeoutError:
@@ -57,18 +56,20 @@ class Commands(commands.Cog):
             if message is None:
                 await member.kick()
             else:
-                name = message.content()
+                name = message.content
+                await member.dm_channel.send(f"Hi {name}, you will be granted access to channel when approved by an admin!")
                 actionrow = create_actionrow(
                 create_button(style=ButtonStyle.green, label="Accept Member", custom_id="confirm"),
                 create_button(style=ButtonStyle.red, label="Decline Member", custom_id="decline", )) # Accept and decline button 
                 embed = discord.Embed(name="Member wants to join", description=f"Member {member.mention} wants to join as {name}, the account was created at {member.created_at}",)
                 embed.set_thumbnail(url=member.avatar_url)
-                message = await managerChat.send(embed=embed, actionrow=[actionrow])       
+                message = await managerChat.send(embed=embed, components=[actionrow])       
                 buttonCtx: ComponentContext = await wait_for_component(self.bot, components=actionrow)
                 if buttonCtx.custom_id == "confirm":
                     await member.edit(nickname=name)
-                    await member.add_role(studentRole)
-                    await managerChat.send(f"{name} confirmed by {buttonCtx.author.name}")
+                    await member.add_roles(studentRole)
+                    await buttonCtx.send(f"{name} confirmed by {buttonCtx.author.name}")
+                    await member.dm_channel.send(f"you have been confirmed by {buttonCtx.author.name}")
 
                 else:
                     await member.kick()
