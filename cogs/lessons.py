@@ -122,7 +122,7 @@ class Lessons(commands.Cog):
                 await asyncio.sleep((self.lessonDuration+5)*60) # we give them an extra 5 minutes before the lesson chats are deleted
                 await self.vc.delete()
                 await self.tc.delete()
-                if not self.repeatWeekly(): # if this is lesson is not repeating we just
+                if not self.repeatWeekly: # if this is lesson is not repeating we just
                     cur.execute("DELETE FROM lessons WHERE classId = ?", (self.id,))
                     for student in students:
                         await student.remove_roles(role) 
@@ -136,15 +136,17 @@ class Lessons(commands.Cog):
         @commands.Cog.listener()
         async def on_voice_state_update(self, member, before, after):
             if not (after.deaf or after.mute or after.self_deaf or after.self_mute or after.self_stream or after.self_video) : # Making sure that the voice state is that someone joined or left
-                cur.execute("SELECT activeLessonsCategoryId FROM schoolGuilds WHERE guildID = ?", (member.guild.id,)) # getting the active lessons category
-                activeLessonsCat = cur.fetchone() 
-                activeLessonsCat = member.guild.get_channel(activeLessonsCat[0])
+                cur.execute("SELECT activeLessonsCategoryId, waitingRoomId FROM schoolGuilds WHERE guildID = ?", (member.guild.id,)) # getting the active lessons category
+                record = cur.fetchone() 
+                activeLessonsCat = member.guild.get_channel(record[0])
+                waitingRoom = member.guild.get_channel(record[1])
+                if after.channel == waitingRoom or before.channel == waitingRoom:
+                    return
                 if after.channel in activeLessonsCat.channels or before.channel in activeLessonsCat.channels: # If the voice channel is an active lesson voice chat
                     if after.channel in activeLessonsCat.channels: # If person joined
                         lessonChannel = after.channel
                     elif before.channel in activeLessonsCat.channels: # If person left
                         lessonChannel = before.channel
-
                     cur.execute("SELECT * FROM lessons WHERE VC = ?", (lessonChannel.id,))
                     payload = cur.fetchone()
                     lesson = self.Lesson(payload, self.bot) ## getting all the lesson info then fetching all the objects
@@ -180,7 +182,7 @@ class Lessons(commands.Cog):
                         await lesson.teacher.create_dm()
                         await lesson.teacher.dm_channel.send(f"{member.name} just left the call!")
                         await channel.send(f"{member.name} just left the call!")
-                    if lessonChannel == after.channel():
+                    if lessonChannel == after.channel:
                         time = datetime.fromisoformat(self.dateTime)
                         now = datetime.utcnow()
                         difference = (now - time).seconds
@@ -289,7 +291,11 @@ class Lessons(commands.Cog):
                     break
             await ctx.send("All students have beeen added run the command again to add more!")
             con.commit()
-        
+        @cog_ext.cog_slash(name="deletelesson", description="Deletes a lesson", guild_ids=guild_ids, options=[create_option(name="name",description="name of lesson to be deleted", option_type=3, required=True)])
+        async def deleteLesson(self, ctx: discord_slash.SlashContext, name):
+            name = name.lower()
+            cur.execute("DELETE FROM lessons WHERE guildId = ? AND LOWER(name) = ? ", (ctx.guild.id, name))
+            await ctx.send(f"Deleted lesson {name}")           
         @cog_ext.cog_slash(name="createlesson", description="Creates a lesson", guild_ids=guild_ids, options = [create_option(name="name",description="The name of the Lesson (must be unique)", required=True, option_type=3),
                                                                                                                 create_option(name="subject",description="The subject of the lesson", required=True, option_type=3), 
                                                                                                                 create_option(name="time", description="The time of the event in the format DD/MM/YYYY HH:MM", required=True, option_type=3),
@@ -376,7 +382,7 @@ class Lessons(commands.Cog):
             
             now = datetime.utcnow() # now
             
-            now = now + timedelta(minutes=1) + timedelta(hours=1) # adding an hour because in the UK we are +01:00
+            now = now + timedelta(minutes=1)  # adding an hour because in the UK we are +01:00
             frmt = "%Y-%m-%d %H:%M:00"
 
             cur.execute("SELECT * FROM lessons")
